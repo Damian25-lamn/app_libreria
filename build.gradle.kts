@@ -40,6 +40,26 @@ dependencies {
     implementation("org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+    // Spring Core
+    // Núcleo del framework Spring (inyección de dependencias, ciclo de vida de beans, etc.)
+    implementation("org.springframework:spring-core:6.2.8")
+    // Spring Data JDBC: repositorios tipo CRUD y mapeo de entidades usando JDBC sin JPA
+    implementation("org.springframework.data:spring-data-jdbc:3.5.1")
+    // Incluye clases necesarias como JdbcConverter, RelationalDataAccessStrategy, etc.
+    implementation("org.springframework.data:spring-data-relational:3.2.5")
+    // Proporciona soporte de JDBC tradicional: NamedParameterJdbcTemplate, etc.
+    implementation("org.springframework:spring-jdbc:6.2.8")
+    // HikariCP: pool de conexiones recomendado por Spring Boot
+    implementation("com.zaxxer:HikariCP:5.0.1")
+    // Driver oficial de PostgreSQL
+    implementation("org.postgresql:postgresql:42.7.7")
+
+    // JavaFX (ajustar a tu sistema)
+    implementation("org.openjfx:javafx-controls:21.0.1")
+    implementation("org.openjfx:javafx-fxml:21.0.1")
+
+    implementation("org.slf4j:slf4j-simple:2.0.13")
 }
 
 tasks.withType<Test> {
