@@ -2,21 +2,27 @@ package org.programacion.avanzada.bookstoreapp.model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("purchaseorder")
+@Table("purchase_orders")
 public class PurchaseOrder {
     @Id
     private Long id;
 
-    private Long customerId;     // FK hacia customer.id
-    private String status;
-    private LocalDate placedon;
-    private LocalDate deliveredon;
+    @Column("customer_id")
+    private Long customerId;
     private double total;
+    private String status;
+    @Column("placed_on")
+    private LocalDateTime placedOn;
+    @Column("delivered_on")
+    private LocalDateTime deliveredOn;
+
 }

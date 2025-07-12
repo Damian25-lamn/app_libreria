@@ -9,12 +9,11 @@ import org.springframework.data.relational.core.mapping.Table;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("author")
+@Table("authors")
 public class Author {
 
     @Id
     private Integer id;
-
     private String name;
     private int version;
 }
