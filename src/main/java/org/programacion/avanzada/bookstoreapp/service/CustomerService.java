@@ -3,34 +3,38 @@ package org.programacion.avanzada.bookstoreapp.service;
 import org.programacion.avanzada.bookstoreapp.model.Customer;
 import org.programacion.avanzada.bookstoreapp.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CustomerService {
 
-    private final CustomerRepository repo;
+    private final CustomerRepository customerRepo;
 
-    public CustomerService(CustomerRepository repo) {
-        this.repo = repo;
+    public CustomerService(CustomerRepository customerRepo) {
+        this.customerRepo = customerRepo;
     }
 
-    public Customer registrarCliente(Customer customer) {
-        return repo.save(customer);
+    public void guardarCliente(Customer customer) {
+        customerRepo.save(customer);
     }
 
-    public Optional<Customer> obtenerClientePorId(Long id) {
-        return repo.findById(id);
+    public Optional<Customer> buscarClientePorId(Integer id) {
+        return customerRepo.findById(id);
     }
 
-    public Optional<Customer> obtenerClientePorEmail(String email) {
-        return repo.findByEmail(email);
+    public Optional<Customer> buscarClientePorEmail(String email) {
+        return customerRepo.findByEmail(email);
     }
 
-    public Iterable<Customer> listarTodos() {
-        return repo.findAll();
+    public void eliminarCliente(Integer id) {
+        customerRepo.deleteById(id);
     }
 
-    public void eliminarCliente(Long id) {
-        repo.deleteById(id);
+    public List<Customer> listarClientes() {
+        List<Customer> lista = new ArrayList<>();
+        customerRepo.findAll().forEach(lista::add);
+        return lista;
     }
 }

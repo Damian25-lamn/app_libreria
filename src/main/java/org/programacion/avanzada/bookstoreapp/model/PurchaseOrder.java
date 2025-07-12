@@ -4,8 +4,6 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -14,10 +12,10 @@ import java.time.LocalDateTime;
 @Table("purchase_orders")
 public class PurchaseOrder {
     @Id
-    private Long id;
+    private Integer id;
 
     @Column("customer_id")
-    private Long customerId;
+    private Integer customerId;
     private double total;
     private String status;
     @Column("placed_on")

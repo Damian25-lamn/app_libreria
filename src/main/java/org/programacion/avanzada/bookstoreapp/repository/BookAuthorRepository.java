@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface BookAuthorRepository extends CrudRepository<BookAuthor, Void> {
+public interface BookAuthorRepository extends CrudRepository<BookAuthor, BookAuthor> {
     List<BookAuthor> findByBooksIsbn(String isbn);
     List<BookAuthor> findByAuthorsId(Integer authorId);
 }

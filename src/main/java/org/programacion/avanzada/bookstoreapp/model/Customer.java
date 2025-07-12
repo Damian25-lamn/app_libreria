@@ -10,7 +10,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("customers")
 public class Customer {
     @Id
-    private Long id;
+    private Integer id;
 
     private String name;
     private String email;

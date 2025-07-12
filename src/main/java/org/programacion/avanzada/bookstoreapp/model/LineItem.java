@@ -1,4 +1,4 @@
-package org.programacion.avanzada.bookstoreapp.model.lineitem;
+package org.programacion.avanzada.bookstoreapp.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
@@ -12,12 +12,10 @@ import lombok.*;
 public class LineItem {
 
     @Id
-    private Long id;
+    private Integer id;
 
     @Column("order_id")
-    private Long orderId;
+    private Integer orderId;
     private int quantity;
     private String bookIsbn;
-
-
 }

@@ -3,35 +3,39 @@ package org.programacion.avanzada.bookstoreapp.service;
 import org.programacion.avanzada.bookstoreapp.model.PurchaseOrder;
 import org.programacion.avanzada.bookstoreapp.repository.PurchaseOrderRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PurchaseOrderService {
 
-    private final PurchaseOrderRepository repo;
+    private final PurchaseOrderRepository orderRepo;
 
-    public PurchaseOrderService(PurchaseOrderRepository repo) {
-        this.repo = repo;
+    public PurchaseOrderService(PurchaseOrderRepository orderRepo) {
+        this.orderRepo = orderRepo;
     }
 
-    public List<PurchaseOrder> obtenerPedidosPorCliente(Long customerId) {
-        return repo.findByCustomerId(customerId);
+    public void guardarPedido(PurchaseOrder pedido) {
+        orderRepo.save(pedido);
     }
 
-    public Optional<PurchaseOrder> obtenerPedidoPorId(Long id) {
-        return repo.findById(id);
+    public Optional<PurchaseOrder> buscarPedido(Integer id) {
+        return orderRepo.findById(id);
     }
 
-    public PurchaseOrder crearPedido(PurchaseOrder pedido) {
-        return repo.save(pedido);
+    public void eliminarPedido(Integer id) {
+        orderRepo.deleteById(id);
     }
 
-    public void eliminarPedido(Long id) {
-        repo.deleteById(id);
+    public List<PurchaseOrder> listarPedidos() {
+        List<PurchaseOrder> lista = new ArrayList<>();
+        orderRepo.findAll().forEach(lista::add);
+        return lista;
     }
 
-    public List<PurchaseOrder> listarTodos() {
-        return (List<PurchaseOrder>) repo.findAll();
+    public List<PurchaseOrder> listarPedidosPorCliente(Integer customerId) {
+        return orderRepo.findByCustomerId(customerId);
     }
 }
