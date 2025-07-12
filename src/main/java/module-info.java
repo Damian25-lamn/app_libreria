@@ -14,7 +14,16 @@ module org.programacion.avanzada.bookstoreapp {
     requires spring.data.relational;
     requires spring.tx;
     requires spring.core;
+    requires spring.beans;
 
-    opens org.programacion.avanzada.bookstoreapp to javafx.fxml;
+    // abrir paquetes para reflexión de Spring
+    opens org.programacion.avanzada.bookstoreapp to javafx.fxml, spring.core, spring.beans;
+
+// Añadir paquetes para reflexión de Spring
+    opens org.programacion.avanzada.bookstoreapp.config to spring.core, spring.beans;
+    opens org.programacion.avanzada.bookstoreapp.model to spring.core, spring.beans;
+    opens org.programacion.avanzada.bookstoreapp.model.lineitem to spring.core, spring.beans;
+    opens org.programacion.avanzada.bookstoreapp.service to spring.core, spring.beans;
+
     exports org.programacion.avanzada.bookstoreapp;
 }
