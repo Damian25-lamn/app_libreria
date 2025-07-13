@@ -1,6 +1,5 @@
 package org.programacion.avanzada.bookstoreapp;
 
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -29,9 +28,9 @@ public class HelloApplication extends Application {
         BookAuthorService bookAuthorService = context.getBean(BookAuthorService.class);
 
         // Crear datos de ejemplo
-        Author autor = authorService.guardarAutor(new Author(null, "Isabel Allende", null));
+        Author autor = authorService.guardarAutor(new Author(191, "Isabel Allende", null));
         Book libro = Book.builder()
-                .isbn("111-222-351")
+                .isbn("111-222-312")
                 .title("La casa de los espíritus")
                 .price(25.00)
                 .version(null)
