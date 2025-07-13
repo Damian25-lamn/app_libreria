@@ -2,17 +2,20 @@ package org.programacion.avanzada.bookstoreapp.model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("customers")
+@Table(name = "customers")
 public class Customer {
     @Id
     private Integer id;
 
     private String name;
     private String email;
-    private int version;
+    @Version
+    private Integer version;
 }

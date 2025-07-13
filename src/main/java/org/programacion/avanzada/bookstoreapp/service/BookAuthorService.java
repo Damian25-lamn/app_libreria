@@ -2,11 +2,14 @@ package org.programacion.avanzada.bookstoreapp.service;
 
 import org.programacion.avanzada.bookstoreapp.model.Author;
 import org.programacion.avanzada.bookstoreapp.model.Book;
-import org.programacion.avanzada.bookstoreapp.model.BookAuthor;
+import org.programacion.avanzada.bookstoreapp.model.bookAuthor.BookAuthor;
+import org.programacion.avanzada.bookstoreapp.model.bookAuthor.BookAuthorId;
 import org.programacion.avanzada.bookstoreapp.repository.AuthorRepository;
 import org.programacion.avanzada.bookstoreapp.repository.BookAuthorRepository;
 import org.programacion.avanzada.bookstoreapp.repository.BookRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -23,6 +26,16 @@ public class BookAuthorService {
         this.bookAuthorRepo = bookAuthorRepo;
     }
 
+    @Transactional
+    public void guardarRelacionLibroAutor(String isbn, Integer authorId) {
+        BookAuthorId id = new BookAuthorId(isbn, authorId);
+
+        if (!bookAuthorRepo.existsByCompositeId(id)) {
+            bookAuthorRepo.save(new BookAuthor(id));
+        }
+    }
+
+    @Transactional(readOnly = true)
     public List<Author> listarAutoresDeLibro(String isbn) {
         return bookAuthorRepo.findByBooksIsbn(isbn).stream()
                 .map(rel -> authorRepo.findById(rel.getAuthorsId()).orElse(null))
@@ -30,19 +43,13 @@ public class BookAuthorService {
                 .toList();
     }
 
-    public List<Book> listarLibrosDeAutor(Integer id) {
-        return bookAuthorRepo.findByAuthorsId(id).stream()
+    @Transactional(readOnly = true)
+    public List<Book> listarLibrosDeAutor(Integer authorId) {
+        return bookAuthorRepo.findByAuthorsId(authorId).stream()
                 .map(rel -> bookRepo.findById(rel.getBooksIsbn()).orElse(null))
                 .filter(Objects::nonNull)
                 .toList();
     }
 
-    public void guardarRelacionLibroAutor(String isbn, Integer authorId) {
-        boolean exists = bookAuthorRepo.findByBooksIsbn(isbn).stream()
-                .anyMatch(rel -> rel.getAuthorsId().equals(authorId));
 
-        if (!exists) {
-            bookAuthorRepo.save(new BookAuthor(isbn, authorId));
-        }
-    }
 }

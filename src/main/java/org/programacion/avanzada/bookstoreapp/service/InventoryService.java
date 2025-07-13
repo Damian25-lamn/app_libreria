@@ -17,8 +17,8 @@ public class InventoryService {
         this.inventoryRepo = inventoryRepo;
     }
 
-    public void guardarEnInventario(Inventory inventory) {
-        inventoryRepo.save(inventory);
+    public Inventory guardarEnInventario(Inventory inventory) {
+        return inventoryRepo.save(inventory);
     }
 
     public Optional<Inventory> buscarDelInventario(String isbn) {

@@ -17,8 +17,8 @@ public class PurchaseOrderService {
         this.orderRepo = orderRepo;
     }
 
-    public void guardarPedido(PurchaseOrder pedido) {
-        orderRepo.save(pedido);
+    public PurchaseOrder guardarPedido(PurchaseOrder pedido) {
+        return orderRepo.save(pedido);
     }
 
     public Optional<PurchaseOrder> buscarPedido(Integer id) {

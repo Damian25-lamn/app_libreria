@@ -14,8 +14,8 @@ public class LineItemService {
         this.lineItemRepo = lineItemRepo;
     }
 
-    public void guardarItem(LineItem item) {
-        lineItemRepo.save(item);
+    public LineItem guardarItem(LineItem item) {
+        return lineItemRepo.save(item);
     }
 
     public List<LineItem> listarItemsPorOrderId(Integer orderId) {

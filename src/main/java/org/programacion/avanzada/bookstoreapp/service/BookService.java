@@ -3,6 +3,8 @@ package org.programacion.avanzada.bookstoreapp.service;
 import org.programacion.avanzada.bookstoreapp.model.Book;
 import org.programacion.avanzada.bookstoreapp.repository.BookRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +17,13 @@ public class BookService {
         this.bookRepo = bookRepo;
     }
 
-    public void guardarLibro(Book book) {
-        bookRepo.save(book);
+    @Transactional
+    public void guardarLibro(Book libro) {
+        if (bookRepo.existsById(libro.getIsbn())) {
+            bookRepo.save(libro);
+        } else {
+            bookRepo.save(libro);
+        }
     }
 
     public Optional<Book> buscarLibro(String isbn) {
@@ -27,6 +34,7 @@ public class BookService {
         bookRepo.deleteById(isbn);
     }
 
+    @Transactional(readOnly = true)
     public List<Book> listarLibros() {
         List<Book> lista = new ArrayList<>();
         bookRepo.findAll().forEach(lista::add);

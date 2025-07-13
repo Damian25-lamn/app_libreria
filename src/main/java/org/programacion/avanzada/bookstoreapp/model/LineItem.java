@@ -6,9 +6,10 @@ import org.springframework.data.relational.core.mapping.Table;
 import lombok.*;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("line_items")
+@Table(name = "line_items")
 public class LineItem {
 
     @Id

@@ -16,8 +16,8 @@ public class CustomerService {
         this.customerRepo = customerRepo;
     }
 
-    public void guardarCliente(Customer customer) {
-        customerRepo.save(customer);
+    public Customer guardarCliente(Customer customer) {
+        return customerRepo.save(customer);
     }
 
     public Optional<Customer> buscarClientePorId(Integer id) {

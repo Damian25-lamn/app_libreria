@@ -7,9 +7,10 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.time.LocalDateTime;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("purchase_orders")
+@Table(name = "purchase_orders")
 public class PurchaseOrder {
     @Id
     private Integer id;

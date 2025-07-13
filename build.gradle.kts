@@ -1,8 +1,8 @@
 plugins {
     java
     application
-    id("org.javamodularity.moduleplugin") version "1.8.12"
-    id("org.openjfx.javafxplugin") version "0.0.13"
+    //id("org.javamodularity.moduleplugin") version "1.8.12"
+    id("org.openjfx.javafxplugin") version "0.1.0"
     id("org.beryx.jlink") version "2.25.0"
     id("io.freefair.lombok") version "8.13.1"
 }
@@ -17,9 +17,12 @@ repositories {
 val junitVersion = "5.10.2"
 
 java {
+
+    //modularity.inferModulePath = true
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
+
 }
 
 tasks.withType<JavaCompile> {
@@ -29,15 +32,16 @@ tasks.withType<JavaCompile> {
 application {
     mainModule.set("org.programacion.avanzada.bookstoreapp")
     mainClass.set("org.programacion.avanzada.bookstoreapp.HelloApplication")
+    applicationDefaultJvmArgs = listOf("-Xmx512m", "-Xms256m")
 }
 
 javafx {
-    version = "21"
+    version = "21.0.1"
     modules = listOf("javafx.controls", "javafx.fxml")
 }
 
 dependencies {
-    implementation("org.controlsfx:controlsfx:11.2.1")
+    implementation("org.controlsfx:controlsfx:11.1.2")
     implementation("org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
@@ -51,6 +55,15 @@ dependencies {
     implementation("org.springframework.data:spring-data-relational:3.2.5")
     // Proporciona soporte de JDBC tradicional: NamedParameterJdbcTemplate, etc.
     implementation("org.springframework:spring-jdbc:6.2.8")
+
+    // Spring Transaction (¡CRUCIAL!)
+    implementation("org.springframework:spring-tx:6.2.8")
+    // Spring Context (para ApplicationContext)
+    implementation("org.springframework:spring-context:6.2.8")
+    // Spring AOP (necesario para proxies transaccionales)
+    implementation("org.springframework:spring-aop:6.2.8")
+
+
     // HikariCP: pool de conexiones recomendado por Spring Boot
     implementation("com.zaxxer:HikariCP:5.0.1")
     // Driver oficial de PostgreSQL
@@ -61,6 +74,10 @@ dependencies {
     implementation("org.openjfx:javafx-fxml:21.0.1")
 
     implementation("org.slf4j:slf4j-simple:2.0.13")
+
+    //Actualizacion de Lombok
+    compileOnly("org.projectlombok:lombok:1.18.30")
+    annotationProcessor("org.projectlombok:lombok:1.18.30")
 }
 
 tasks.withType<Test> {
@@ -74,3 +91,4 @@ jlink {
         name = "app"
     }
 }
+

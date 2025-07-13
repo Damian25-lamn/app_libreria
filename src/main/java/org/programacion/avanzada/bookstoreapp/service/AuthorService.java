@@ -3,6 +3,8 @@ package org.programacion.avanzada.bookstoreapp.service;
 import org.programacion.avanzada.bookstoreapp.model.Author;
 import org.programacion.avanzada.bookstoreapp.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +18,9 @@ public class AuthorService {
         this.authorRepo = authorRepository;
     }
 
-    public void guardarAutor(Author author) {
-        authorRepo.save(author);
+    @Transactional
+    public Author guardarAutor(Author author) {
+        return authorRepo.save(author);
     }
 
     public Optional<Author> buscarAutor(Integer id) {
@@ -28,7 +31,8 @@ public class AuthorService {
         authorRepo.deleteById(id);
     }
 
-        public List<Author> listarAutores() {
+    @Transactional(readOnly = true)
+    public List<Author> listarAutores() {
         List<Author> lista = new ArrayList<>();
         authorRepo.findAll().forEach(lista::add);
         return lista;
