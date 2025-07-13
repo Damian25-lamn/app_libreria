@@ -41,43 +41,35 @@ javafx {
 }
 
 dependencies {
-    implementation("org.controlsfx:controlsfx:11.1.2")
-    implementation("org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    // --- Controles y estilos adicionales para JavaFX ---
+    implementation("org.controlsfx:controlsfx:11.2.1") // Librería con componentes avanzados para JavaFX
+    implementation("org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0") // Estilos CSS estilo Bootstrap para JavaFX
 
-    // Spring Core
-    // Núcleo del framework Spring (inyección de dependencias, ciclo de vida de beans, etc.)
-    implementation("org.springframework:spring-core:6.2.8")
-    // Spring Data JDBC: repositorios tipo CRUD y mapeo de entidades usando JDBC sin JPA
-    implementation("org.springframework.data:spring-data-jdbc:3.5.1")
-    // Incluye clases necesarias como JdbcConverter, RelationalDataAccessStrategy, etc.
-    implementation("org.springframework.data:spring-data-relational:3.2.5")
-    // Proporciona soporte de JDBC tradicional: NamedParameterJdbcTemplate, etc.
-    implementation("org.springframework:spring-jdbc:6.2.8")
+    // --- Dependencias para pruebas con JUnit Jupiter ---
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}") // API principal de JUnit 5
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}") // Motor de ejecución para JUnit 5
 
-    // Spring Transaction (¡CRUCIAL!)
-    implementation("org.springframework:spring-tx:6.2.8")
-    // Spring Context (para ApplicationContext)
-    implementation("org.springframework:spring-context:6.2.8")
-    // Spring AOP (necesario para proxies transaccionales)
-    implementation("org.springframework:spring-aop:6.2.8")
+    // --- Spring Core y sus módulos esenciales ---
+    implementation("org.springframework:spring-core:6.2.8") // Núcleo del framework: beans, lifecycle, IoC
+    implementation("org.springframework:spring-context:6.2.8") // Contexto de aplicación: @ComponentScan, @Service, etc.
+    implementation("org.springframework:spring-jdbc:6.2.8") // JdbcTemplate, NamedParameterJdbcTemplate, soporte JDBC
+    implementation("org.springframework:spring-tx:6.2.8") // Transacciones programáticas y declarativas con @Transactional
 
+    // --- Spring Data JDBC ---
+    implementation("org.springframework.data:spring-data-jdbc:3.5.1") // Repositorios tipo CRUD con JDBC
+    implementation("org.springframework.data:spring-data-relational:3.5.1") // JdbcConverter, acceso relacional, mapeo de entidades
+    implementation("org.springframework.data:spring-data-commons:3.5.1") // Interfaces comunes a todos los módulos Spring Data
 
-    // HikariCP: pool de conexiones recomendado por Spring Boot
-    implementation("com.zaxxer:HikariCP:5.0.1")
-    // Driver oficial de PostgreSQL
-    implementation("org.postgresql:postgresql:42.7.7")
+    // --- Base de datos: conexión y driver ---
+    implementation("com.zaxxer:HikariCP:5.0.1") // Pool de conexiones recomendado por Spring
+    implementation("org.postgresql:postgresql:42.7.7") // Driver JDBC oficial para PostgreSQL
 
-    // JavaFX (ajustar a tu sistema)
-    implementation("org.openjfx:javafx-controls:21.0.1")
-    implementation("org.openjfx:javafx-fxml:21.0.1")
+    // --- JavaFX (UI nativa para escritorio) ---
+    implementation("org.openjfx:javafx-controls:21.0.1") // Controles estándar: botones, listas, etc.
+    implementation("org.openjfx:javafx-fxml:21.0.1") // Soporte para archivos FXML (diseño de interfaces en XML)
 
-    implementation("org.slf4j:slf4j-simple:2.0.13")
-
-    //Actualizacion de Lombok
-    compileOnly("org.projectlombok:lombok:1.18.30")
-    annotationProcessor("org.projectlombok:lombok:1.18.30")
+    // --- Logging simple con SLF4J ---
+    implementation("org.slf4j:slf4j-simple:2.0.13") // Implementación simple de SLF4J (para salida en consola)}
 }
 
 tasks.withType<Test> {

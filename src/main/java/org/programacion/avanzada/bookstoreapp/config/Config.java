@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -22,9 +23,9 @@ public class Config extends AbstractJdbcConfiguration {
     @Bean
     public DataSource dataSource() {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:postgresql://localhost:5432/Actividad_1");
+        config.setJdbcUrl("jdbc:postgresql://localhost:5432/Actividad1_1");
         config.setUsername("postgres");
-        config.setPassword("VUYKg811");
+        config.setPassword("Uce.2025");
         config.setDriverClassName("org.postgresql.Driver");
         return new HikariDataSource(config);
     }
@@ -37,5 +38,10 @@ public class Config extends AbstractJdbcConfiguration {
     @Bean
     public PlatformTransactionManager transactionManager(DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
+    }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
     }
 }

@@ -11,6 +11,7 @@ import org.programacion.avanzada.bookstoreapp.model.Book;
 import org.programacion.avanzada.bookstoreapp.service.AuthorService;
 import org.programacion.avanzada.bookstoreapp.service.BookAuthorService;
 import org.programacion.avanzada.bookstoreapp.service.BookService;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.net.URL;
@@ -29,7 +30,7 @@ public class HelloApplication extends Application {
         BookAuthorService bookAuthorService = context.getBean(BookAuthorService.class);
 
         // Crear datos de ejemplo
-        Author autor = authorService.guardarAutor(new Author(null, "Isabel Allende", null));
+        //Author autor = authorService.guardarAutor(new Author(null, "Isabel Allende", null));
         Book libro = Book.builder()
                 .isbn("111-222-351")
                 .title("La casa de los espíritus")
@@ -37,16 +38,16 @@ public class HelloApplication extends Application {
                 .version(null)
                 .build();
 
-        bookService.guardarLibro(libro); // necesitas crear un metodo guardar en BookService si no está
+        //bookService.guardarLibro(libro); // necesitas crear un metodo guardar en BookService si no está
 
-        bookAuthorService.guardarRelacionLibroAutor(libro.getIsbn(), autor.getId());
+        //bookAuthorService.guardarRelacionLibroAutor(libro.getIsbn(), autor.getId());
 
         // Mostrar autores del libro
         System.out.println("Autores del libro '" + libro.getTitle() + "':");
         bookAuthorService.listarAutoresDeLibro(libro.getIsbn())
                 .forEach(System.out::println);
 
-        URL fxmlUrl = HelloApplication.class.getResource("/org/programacion/avanzada/bookstoreapp/hello-view.fxml");
+        URL fxmlUrl = HelloApplication.class.getResource("/org/programacion/avanzada/bookstoreapp/welcome.fxml");
         System.out.println("FXML URL: " + fxmlUrl); // Esto debe imprimir algo distinto a null
 
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
@@ -63,6 +64,10 @@ public class HelloApplication extends Application {
         if (context != null) {
             context.close();
         }
+    }
+
+    public static ConfigurableApplicationContext getContext() {
+        return context;
     }
 
     public static void main(String[] args) {
