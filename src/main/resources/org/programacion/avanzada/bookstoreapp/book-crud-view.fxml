@@ -1,43 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.layout.GridPane?>
 <VBox spacing="10" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.programacion.avanzada.bookstoreapp.controller.BookCrudController">
+      fx:controller="org.programacion.avanzada.bookstoreapp.controller.BookCrudController"
+      alignment="CENTER" >
 
     <Label text="CRUD Libros" style="-fx-font-size: 18px;"/>
 
     <TableView fx:id="tableBooks" prefHeight="200">
         <columns>
-            <TableColumn fx:id="isbnColumn"  text="ISBN" prefWidth="150"/>
+            <TableColumn fx:id="isbnColumn"  text="ISBN"   prefWidth="150"/>
             <TableColumn fx:id="titleColumn" text="Título" prefWidth="200"/>
             <TableColumn fx:id="priceColumn" text="Precio" prefWidth="100"/>
         </columns>
     </TableView>
 
     <GridPane hgap="5" vgap="5">
-        <Label text="ISBN:"     GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="isbnField"   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Label text="ISBN:"    GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="isbnField"    GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-        <Label text="Título:"   GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <TextField fx:id="titleField"  GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Label text="Título:"  GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="titleField"   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-        <Label text="Precio:"   GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <TextField fx:id="priceField"  GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <Label text="Precio:"  GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="priceField"   GridPane.rowIndex="2" GridPane.columnIndex="1"/>
     </GridPane>
 
-    <HBox spacing="10">
-        <Button text="Nuevo"     onAction="#onNewBook"/>
-        <Button text="Guardar"   onAction="#onSaveBook"/>
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Nuevo"      onAction="#onNewBook"/>
+        <Button text="Guardar"    onAction="#onSaveBook"/>
         <Button text="Actualizar" onAction="#onUpdateBook"/>
-        <Button text="Eliminar"  onAction="#onDeleteBook"/>
+        <Button text="Eliminar"   onAction="#onDeleteBook"/>
+        <Button text="Volver al Menú" onAction="#onBackToMenu"/>
     </HBox>
 </VBox>
-

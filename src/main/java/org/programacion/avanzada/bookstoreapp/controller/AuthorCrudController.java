@@ -1,38 +1,43 @@
 package org.programacion.avanzada.bookstoreapp.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import org.programacion.avanzada.bookstoreapp.model.Author;
 import org.programacion.avanzada.bookstoreapp.service.AuthorService;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 @Component
 public class AuthorCrudController {
 
     private final AuthorService authorService;
+    private final ApplicationContext context;
 
-    public AuthorCrudController(AuthorService authorService) {
+    public AuthorCrudController(AuthorService authorService, ApplicationContext context) {
         this.authorService = authorService;
+        this.context = context;
     }
 
     @FXML private TableView<Author> tableAuthors;
     @FXML private TableColumn<Author, Integer> idColumn;
-    @FXML private TableColumn<Author, String>  nameColumn;
+    @FXML private TableColumn<Author, String> nameColumn;
 
     @FXML private TextField idField;
     @FXML private TextField nameField;
 
     @FXML
     private void initialize() {
-        // 1) configura columnas
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-        // 2) refresca datos
         refreshTable();
-
-        // 3) al hacer clic en una fila, cargar sus datos en el formulario
         tableAuthors.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
                 idField.setText(String.valueOf(newSel.getId()));
@@ -49,7 +54,6 @@ public class AuthorCrudController {
 
     @FXML
     private void onSaveAuthor() {
-        // crea nuevo si no existía
         Author a = new Author(
                 Integer.parseInt(idField.getText()),
                 nameField.getText(),
@@ -78,6 +82,16 @@ public class AuthorCrudController {
             refreshTable();
             clearFields();
         }
+    }
+
+    @FXML
+    private void onBackToMenu(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/programacion/avanzada/bookstoreapp/menu-view.fxml"));
+        loader.setControllerFactory(context::getBean);
+        Scene scene = new Scene(loader.load(), 800, 600);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Menú Principal");
     }
 
     private void refreshTable() {
