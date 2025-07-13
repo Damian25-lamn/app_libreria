@@ -25,7 +25,7 @@ public class Config extends AbstractJdbcConfiguration {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl("jdbc:postgresql://localhost:5432/Actividad_1");
         config.setUsername("postgres");
-        config.setPassword("VUYKg811");
+        config.setPassword("123456");
         config.setDriverClassName("org.postgresql.Driver");
         return new HikariDataSource(config);
     }
@@ -36,12 +36,12 @@ public class Config extends AbstractJdbcConfiguration {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(DataSource dataSource) {
-        return new DataSourceTransactionManager(dataSource);
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
     }
 }
