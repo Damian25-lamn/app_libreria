@@ -18,7 +18,7 @@ public class PurchaseOrder {
     @Column("customer_id")
     private Integer customerId;
     private double total;
-    private String status;
+    private int status;
     @Column("placed_on")
     private LocalDateTime placedOn;
     @Column("delivered_on")

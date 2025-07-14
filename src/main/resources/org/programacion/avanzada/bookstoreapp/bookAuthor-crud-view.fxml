@@ -34,4 +34,6 @@
             <ListView fx:id="authorsListView" prefWidth="300" prefHeight="200"/>
         </VBox>
     </HBox>
+
+    <Button text="Volver al Menú" onAction="#onBackToMenu" style="-fx-font-weight: bold;"/>
 </VBox>

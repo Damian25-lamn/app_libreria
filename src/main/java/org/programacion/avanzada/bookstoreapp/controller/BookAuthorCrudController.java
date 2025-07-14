@@ -1,22 +1,30 @@
 package org.programacion.avanzada.bookstoreapp.controller;
 
-import org.springframework.stereotype.Component;
-import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.programacion.avanzada.bookstoreapp.model.Author;
 import org.programacion.avanzada.bookstoreapp.model.Book;
 import org.programacion.avanzada.bookstoreapp.service.BookAuthorService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.List;
 
 @Component
 public class BookAuthorCrudController {
 
     private final BookAuthorService bookAuthorService;
+    private final ApplicationContext context;
 
-    public BookAuthorCrudController(BookAuthorService bookAuthorService) {
+    public BookAuthorCrudController(BookAuthorService bookAuthorService, ApplicationContext context) {
         this.bookAuthorService = bookAuthorService;
+        this.context = context;
     }
 
     @FXML private TextField isbnField;
@@ -75,7 +83,7 @@ public class BookAuthorCrudController {
         try {
             Integer authorId = Integer.parseInt(authorIdField.getText());
             List<Book> books = bookAuthorService.listarLibrosDeAutor(authorId);
-            booksListView.setItems(FXCollections.observableArrayList(books));
+            booksListView.getItems().setAll(books);
         } catch (NumberFormatException e) {
             showAlert("Error", "El ID del autor debe ser un número", Alert.AlertType.ERROR);
         } catch (Exception e) {
@@ -88,10 +96,21 @@ public class BookAuthorCrudController {
         try {
             String isbn = isbnField.getText();
             List<Author> authors = bookAuthorService.listarAutoresDeLibro(isbn);
-            authorsListView.setItems(FXCollections.observableArrayList(authors));
+            authorsListView.getItems().setAll(authors);
         } catch (Exception e) {
             showAlert("Error", "No se pudieron listar los autores: " + e.getMessage(), Alert.AlertType.ERROR);
         }
+    }
+
+    @FXML
+    private void onBackToMenu(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/programacion/avanzada/bookstoreapp/menu-view.fxml"));
+        loader.setControllerFactory(context::getBean);
+        Scene scene = new Scene(loader.load(), 800, 600);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Menú Principal");
     }
 
     private void showAlert(String title, String message, Alert.AlertType type) {

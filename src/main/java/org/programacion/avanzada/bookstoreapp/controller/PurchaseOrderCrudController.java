@@ -58,7 +58,7 @@ public class PurchaseOrderCrudController {
                 idField.setText(String.valueOf(newSel.getId()));
                 customerIdField.setText(String.valueOf(newSel.getCustomerId()));
                 totalField.setText(String.valueOf(newSel.getTotal()));
-                statusField.setText(newSel.getStatus());
+                statusField.setText(String.valueOf(newSel.getStatus()));
                 if (newSel.getPlacedOn() != null) {
                     placedOnPicker.setValue(newSel.getPlacedOn().toLocalDate());
                 }
@@ -81,7 +81,7 @@ public class PurchaseOrderCrudController {
                 .id(Integer.parseInt(idField.getText()))
                 .customerId(Integer.parseInt(customerIdField.getText()))
                 .total(Double.parseDouble(totalField.getText()))
-                .status(statusField.getText())
+                .status(Integer.parseInt(statusField.getText()))
                 .placedOn(placedOnPicker.getValue() != null ? placedOnPicker.getValue().atStartOfDay() : null)
                 .deliveredOn(deliveredOnPicker.getValue() != null ? deliveredOnPicker.getValue().atStartOfDay() : null)
                 .build();
@@ -97,7 +97,7 @@ public class PurchaseOrderCrudController {
         if (sel != null) {
             sel.setCustomerId(Integer.parseInt(customerIdField.getText()));
             sel.setTotal(Double.parseDouble(totalField.getText()));
-            sel.setStatus(statusField.getText());
+            sel.setStatus(Integer.parseInt(statusField.getText()));
             sel.setPlacedOn(placedOnPicker.getValue() != null ? placedOnPicker.getValue().atStartOfDay() : null);
             sel.setDeliveredOn(deliveredOnPicker.getValue() != null ? deliveredOnPicker.getValue().atStartOfDay() : null);
 

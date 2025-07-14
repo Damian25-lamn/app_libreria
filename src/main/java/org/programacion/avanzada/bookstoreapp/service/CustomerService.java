@@ -3,6 +3,8 @@ package org.programacion.avanzada.bookstoreapp.service;
 import org.programacion.avanzada.bookstoreapp.model.Customer;
 import org.programacion.avanzada.bookstoreapp.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +20,7 @@ public class CustomerService {
         this.purchaseOrderService = purchaseOrderService;
     }
 
+    @Transactional
     public Customer guardarCliente(Customer customer) {
         return customerRepo.save(customer);
     }
@@ -30,11 +33,13 @@ public class CustomerService {
         return customerRepo.findByEmail(email);
     }
 
+    @Transactional
     public void eliminarCliente(Integer id) {
         purchaseOrderService.eliminarPedidosPorCliente(id);
         customerRepo.deleteById(id);
     }
 
+    @Transactional(readOnly = true)
     public List<Customer> listarClientes() {
         List<Customer> lista = new ArrayList<>();
         customerRepo.findAll().forEach(lista::add);

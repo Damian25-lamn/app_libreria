@@ -4,6 +4,7 @@ import org.programacion.avanzada.bookstoreapp.model.PurchaseOrder;
 import org.programacion.avanzada.bookstoreapp.repository.CustomerRepository;
 import org.programacion.avanzada.bookstoreapp.repository.PurchaseOrderRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class PurchaseOrderService {
         this.lineItemService = lineItemService;
     }
 
+    @Transactional
     public PurchaseOrder guardarPedido(PurchaseOrder pedido) {
         return orderRepo.save(pedido);
     }
@@ -28,21 +30,25 @@ public class PurchaseOrderService {
         return orderRepo.findById(id);
     }
 
+    @Transactional
     public void eliminarPedido(Integer id) {
         lineItemService.eliminarItemsPorOrden(id);
         orderRepo.deleteById(id);
     }
 
+    @Transactional
     public void eliminarPedidosPorCliente(Integer customerId) {
         orderRepo.deleteByCustomerId(customerId);
     }
 
+    @Transactional(readOnly = true)
     public List<PurchaseOrder> listarPedidos() {
         List<PurchaseOrder> lista = new ArrayList<>();
         orderRepo.findAll().forEach(lista::add);
         return lista;
     }
 
+    @Transactional(readOnly = true)
     public List<PurchaseOrder> listarPedidosPorCliente(Integer customerId) {
         return orderRepo.findByCustomerId(customerId);
     }

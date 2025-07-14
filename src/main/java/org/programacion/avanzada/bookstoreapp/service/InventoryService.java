@@ -3,6 +3,7 @@ package org.programacion.avanzada.bookstoreapp.service;
 import org.programacion.avanzada.bookstoreapp.model.Inventory;
 import org.programacion.avanzada.bookstoreapp.repository.InventoryRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class InventoryService {
         this.inventoryRepo = inventoryRepo;
     }
 
+    @Transactional
     public Inventory guardarEnInventario(Inventory inventory) {
         return inventoryRepo.save(inventory);
     }
@@ -25,10 +27,12 @@ public class InventoryService {
         return inventoryRepo.findById(isbn);
     }
 
+    @Transactional
     public void eliminarDelInventario(String isbn) {
         inventoryRepo.deleteById(isbn);
     }
 
+    @Transactional(readOnly = true)
     public List<Inventory> listarInventario() {
         List<Inventory> lista = new ArrayList<>();
         inventoryRepo.findAll().forEach(lista::add);
