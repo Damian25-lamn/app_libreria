@@ -3,12 +3,14 @@ package org.programacion.avanzada.bookstoreapp.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.programacion.avanzada.bookstoreapp.model.Customer;
 import org.programacion.avanzada.bookstoreapp.service.CustomerService;
@@ -38,6 +40,9 @@ public class CustomerCrudController {
     @FXML private TextField emailField;
 
     @FXML
+    private VBox rootVBox;
+
+    @FXML
     private void initialize() {
         // 1) Configurar columnas
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -56,6 +61,7 @@ public class CustomerCrudController {
                         emailField.setText(newSel.getEmail());
                     }
                 });
+        rootVBox.setPadding(new Insets(20, 20, 20, 20));
     }
 
     @FXML

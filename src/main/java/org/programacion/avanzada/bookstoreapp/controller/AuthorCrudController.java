@@ -3,10 +3,12 @@ package org.programacion.avanzada.bookstoreapp.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.programacion.avanzada.bookstoreapp.model.Author;
 import org.programacion.avanzada.bookstoreapp.service.AuthorService;
@@ -32,6 +34,8 @@ public class AuthorCrudController {
 
     @FXML private TextField idField;
     @FXML private TextField nameField;
+    @FXML
+    private VBox rootVBox; // Asegúrate de agregar fx:id="rootVBox" al VBox
 
     @FXML
     private void initialize() {
@@ -44,6 +48,7 @@ public class AuthorCrudController {
                 nameField.setText(newSel.getName());
             }
         });
+        rootVBox.setPadding(new Insets(20, 20, 20, 20));
     }
 
     @FXML

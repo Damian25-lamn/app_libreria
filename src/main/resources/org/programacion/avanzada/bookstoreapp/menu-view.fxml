@@ -3,67 +3,39 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+<BorderPane fx:id="mainPane"
+            xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.programacion.avanzada.bookstoreapp.HelloController"
+            stylesheets="@style.css"
             style="-fx-background-color: #f4f4f4;">
 
-    <top>
-        <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
-            <Label text="MENU PRINCIPAL"
-                   style="-fx-text-fill: white;">
-                <font>
-                    <Font name="System Bold" size="24.0"/>
-                </font>
-            </Label>
-        </VBox>
-    </top>
+    <!-- Menú lateral izquierdo -->
+    <left>
+        <VBox spacing="15" alignment="TOP_CENTER"
+              style="-fx-background-color: #2c3e50; -fx-padding: 20;">
+            <Label text="📚 Bookstore" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
 
+            <Button text="Gestión de Autores" onAction="#onOpenAuthorsCrud" styleClass="sidebar-button"/>
+            <Button text="Gestión de Libros" onAction="#onOpenBooksCrud" styleClass="sidebar-button"/>
+            <Button text="Relaciones Libros-Autores" onAction="#onOpenBooksAuthorsCrud" styleClass="sidebar-button"/>
+            <Button text="Gestión de Clientes" onAction="#onOpenCustomersCrud" styleClass="sidebar-button"/>
+            <Button text="Gestión de Órdenes de Compra" onAction="#onOpenPurchaseOrdersCrud" styleClass="sidebar-button"/>
+            <Button text="Gestión de Artículos en Línea" onAction="#onOpenLineItemsCrud" styleClass="sidebar-button"/>
+            <Button text="Gestión de Inventario" onAction="#onOpenInventoryCrud" styleClass="sidebar-button"/>
+            <Button text="Salir" onAction="#onLogout" styleClass="sidebar-button"/>
+        </VBox>
+    </left>
+
+    <!-- Contenido central -->
     <center>
-        <GridPane alignment="CENTER" hgap="15" vgap="15"
-                  style="-fx-padding: 30;">
-
-            <!-- Primera fila -->
-            <Button text="Gestión de Autores" onAction="#onOpenAuthorsCrud"
-                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
-                    GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-
-            <Button text="Gestión de Libros" onAction="#onOpenBooksCrud"
-                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
-                    GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-
-            <!-- Segunda fila -->
-            <Button text="Relaciones Libros-Autores" onAction="#onOpenBooksAuthorsCrud"
-                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
-                    GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-
-            <Button text="Gestión de Clientes" onAction="#onOpenCustomersCrud"
-                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
-                    GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-
-            <!-- Tercera fila -->
-            <Button text="Gestión de Órdenes de Compra" onAction="#onOpenPurchaseOrdersCrud"
-                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
-                    GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-
-            <Button text="Gestión de Artículos en Línea" onAction="#onOpenLineItemsCrud"
-                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
-                    GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-
-            <!-- Cuarta fila -->
-            <Button text="Gestión de Inventario" onAction="#onOpenInventoryCrud"
-                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
-                    GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        </GridPane>
-    </center>
-
-    <bottom>
-        <VBox alignment="CENTER" style="-fx-background-color: #2c3e50; -fx-padding: 10;">
-
+        <VBox alignment="CENTER" spacing="20">
+            <Label text="Bienvenido al Sistema de Librería"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Label text="Selecciona una opción del menú lateral"
+                   style="-fx-font-size: 16px;"/>
         </VBox>
-    </bottom>
+    </center>
 </BorderPane>

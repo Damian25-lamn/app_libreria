@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx"
+<VBox spacing="15" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.programacion.avanzada.bookstoreapp.controller.CustomerCrudController">
+      fx:controller="org.programacion.avanzada.bookstoreapp.controller.CustomerCrudController"
+      alignment="TOP_CENTER"
+      fx:id="rootVBox"
+      stylesheets="@style.css"
+      style="-fx-background-color: #d0e0f0;">
 
-    <Label text="Gestión de Clientes" style="-fx-font-size: 18px;"/>
+    <!-- Título -->
+    <Label text="Gestión de Clientes" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
-    <TableView fx:id="tableCustomers" prefHeight="200">
+    <!-- Tabla de clientes -->
+    <TableView fx:id="tableCustomers" prefHeight="200"
+               style="-fx-border-color: #3c6e91; -fx-border-width: 1.5; -fx-background-radius: 4;">
         <columns>
             <TableColumn fx:id="idColumn"    text="ID"     prefWidth="80"/>
             <TableColumn fx:id="nameColumn"  text="Nombre" prefWidth="200"/>
@@ -16,7 +24,8 @@
         </columns>
     </TableView>
 
-    <GridPane hgap="5" vgap="5">
+    <!-- Formulario -->
+    <GridPane hgap="10" vgap="10">
         <Label text="ID:"       GridPane.rowIndex="0" GridPane.columnIndex="0"/>
         <TextField fx:id="idField"       GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
@@ -27,11 +36,17 @@
         <TextField fx:id="emailField"    GridPane.rowIndex="2" GridPane.columnIndex="1"/>
     </GridPane>
 
-    <HBox spacing="10" alignment="CENTER">
-        <Button text="Nuevo"      onAction="#onNewCustomer"/>
-        <Button text="Guardar"    onAction="#onSaveCustomer"/>
-        <Button text="Actualizar" onAction="#onUpdateCustomer"/>
-        <Button text="Eliminar"   onAction="#onDeleteCustomer"/>
-        <Button text="Volver al Menú" onAction="#onBackToMenu"/>
+    <!-- Botones -->
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Nuevo"      onAction="#onNewCustomer"
+                style="-fx-background-color: #800040; -fx-text-fill: white;"/>
+        <Button text="Guardar"    onAction="#onSaveCustomer"
+                style="-fx-background-color: #2b3a67; -fx-text-fill: white;"/>
+        <Button text="Actualizar" onAction="#onUpdateCustomer"
+                style="-fx-background-color: #007f5f; -fx-text-fill: white;"/>
+        <Button text="Eliminar"   onAction="#onDeleteCustomer"
+                style="-fx-background-color: #b0004c; -fx-text-fill: white;"/>
+        <Button text="Volver al Menú" onAction="#onBackToMenu"
+                style="-fx-background-color: #808080; -fx-text-fill: white;"/>
     </HBox>
 </VBox>

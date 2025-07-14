@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<VBox spacing="10" xmlns="http://javafx.com/javafx"
+<VBox spacing="15" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.programacion.avanzada.bookstoreapp.controller.PurchaseOrderCrudController">
+      fx:controller="org.programacion.avanzada.bookstoreapp.controller.PurchaseOrderCrudController"
+      alignment="TOP_CENTER"
+      fx:id="rootVBox"
+      stylesheets="@style.css"
+      style="-fx-background-color: #d0e0f0;">
 
-    <Label text="Gestión de Órdenes de Compra" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <!-- Título -->
+    <Label text="Gestión de Órdenes de Compra" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
-    <TableView fx:id="tableOrders" prefHeight="300">
+    <!-- Tabla de órdenes -->
+    <TableView fx:id="tableOrders" prefHeight="300"
+               style="-fx-border-color: #3c6e91; -fx-border-width: 1.5; -fx-background-radius: 4;">
         <columns>
             <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
             <TableColumn fx:id="customerIdColumn" text="ID Cliente" prefWidth="80"/>
-            <TableColumn fx:id="totalColumn" text="Total" prefWidth="80">
-                <cellFactory>
-                    <PropertyValueFactory property="total"/>
-                </cellFactory>
-            </TableColumn>
+            <TableColumn fx:id="totalColumn" text="Total" prefWidth="80"/>
             <TableColumn fx:id="statusColumn" text="Estado" prefWidth="100"/>
             <TableColumn fx:id="placedOnColumn" text="Fecha Creación" prefWidth="120"/>
             <TableColumn fx:id="deliveredOnColumn" text="Fecha Entrega" prefWidth="120"/>
         </columns>
     </TableView>
 
+    <!-- Formulario -->
     <GridPane hgap="10" vgap="10">
         <!-- Fila 0: ID -->
         <Label text="ID Pedido:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
@@ -50,11 +53,17 @@
         <DatePicker fx:id="deliveredOnPicker" GridPane.rowIndex="4" GridPane.columnIndex="3"/>
     </GridPane>
 
-    <HBox spacing="10" alignment="CENTER">
-        <Button text="Nuevo" onAction="#onNewOrder" style="-fx-min-width: 80;"/>
-        <Button text="Guardar" onAction="#onSaveOrder" style="-fx-min-width: 80;"/>
-        <Button text="Actualizar" onAction="#onUpdateOrder" style="-fx-min-width: 80;"/>
-        <Button text="Eliminar" onAction="#onDeleteOrder" style="-fx-min-width: 80;"/>
-        <Button text="Volver al Menú" onAction="#onBackToMenu" style="-fx-min-width: 100;"/>
+    <!-- Botones -->
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Nuevo" onAction="#onNewOrder"
+                style="-fx-background-color: #800040; -fx-text-fill: white; -fx-min-width: 80;"/>
+        <Button text="Guardar" onAction="#onSaveOrder"
+                style="-fx-background-color: #2b3a67; -fx-text-fill: white; -fx-min-width: 80;"/>
+        <Button text="Actualizar" onAction="#onUpdateOrder"
+                style="-fx-background-color: #007f5f; -fx-text-fill: white; -fx-min-width: 80;"/>
+        <Button text="Eliminar" onAction="#onDeleteOrder"
+                style="-fx-background-color: #b0004c; -fx-text-fill: white; -fx-min-width: 80;"/>
+        <Button text="Volver al Menú" onAction="#onBackToMenu"
+                style="-fx-background-color: #808080; -fx-text-fill: white; -fx-min-width: 100;"/>
     </HBox>
 </VBox>

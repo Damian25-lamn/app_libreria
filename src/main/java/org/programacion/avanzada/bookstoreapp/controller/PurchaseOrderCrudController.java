@@ -3,10 +3,12 @@ package org.programacion.avanzada.bookstoreapp.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.programacion.avanzada.bookstoreapp.model.PurchaseOrder;
 import org.programacion.avanzada.bookstoreapp.service.PurchaseOrderService;
@@ -43,6 +45,9 @@ public class PurchaseOrderCrudController {
     @FXML private DatePicker deliveredOnPicker;
 
     @FXML
+    private VBox rootVBox;
+
+    @FXML
     private void initialize() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
@@ -67,6 +72,7 @@ public class PurchaseOrderCrudController {
                 }
             }
         });
+        rootVBox.setPadding(new Insets(20, 20, 20, 20));
     }
 
     @FXML

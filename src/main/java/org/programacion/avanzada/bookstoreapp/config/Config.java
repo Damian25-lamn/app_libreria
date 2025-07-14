@@ -23,9 +23,9 @@ public class Config extends AbstractJdbcConfiguration {
     @Bean
     public DataSource dataSource() {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:postgresql://localhost:5432/Actividad_1");
+        config.setJdbcUrl("jdbc:postgresql://localhost:5432/Actividad1_1");
         config.setUsername("postgres");
-        config.setPassword("VUYKg811");
+        config.setPassword("Uce.2025");
         config.setDriverClassName("org.postgresql.Driver");
         return new HikariDataSource(config);
     }

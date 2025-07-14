@@ -3,10 +3,12 @@ package org.programacion.avanzada.bookstoreapp.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.programacion.avanzada.bookstoreapp.model.Book;
 import org.programacion.avanzada.bookstoreapp.service.BookService;
@@ -32,6 +34,8 @@ public class BookCrudController {
     @FXML private TableColumn<Book,Double> priceColumn;
 
     @FXML private TextField isbnField, titleField, priceField;
+    @FXML
+    private VBox rootVBox;
 
     @FXML
     private void initialize() {
@@ -48,6 +52,7 @@ public class BookCrudController {
                 priceField.setText(String.valueOf(sel.getPrice()));
             }
         });
+        rootVBox.setPadding(new Insets(20, 20, 20, 20));
     }
 
     @FXML private void onNewBook() {

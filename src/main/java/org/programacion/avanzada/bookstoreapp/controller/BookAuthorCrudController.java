@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.programacion.avanzada.bookstoreapp.model.Author;
 import org.programacion.avanzada.bookstoreapp.model.Book;
@@ -31,6 +32,8 @@ public class BookAuthorCrudController {
     @FXML private TextField authorIdField;
     @FXML private ListView<Book> booksListView;
     @FXML private ListView<Author> authorsListView;
+    @FXML
+    private VBox rootVBox;
 
     @FXML
     private void initialize() {
