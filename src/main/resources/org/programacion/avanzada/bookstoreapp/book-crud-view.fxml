@@ -7,7 +7,7 @@
       fx:controller="org.programacion.avanzada.bookstoreapp.controller.BookCrudController"
       alignment="CENTER" >
 
-    <Label text="CRUD Libros" style="-fx-font-size: 18px;"/>
+    <Label text="Gestión de Libros" style="-fx-font-size: 18px;"/>
 
     <TableView fx:id="tableBooks" prefHeight="200">
         <columns>

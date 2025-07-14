@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PurchaseOrderRepository extends CrudRepository<PurchaseOrder, Integer> {
     List<PurchaseOrder> findByCustomerId(Integer customerId);
+    void deleteByCustomerId(Integer customerId);
 }

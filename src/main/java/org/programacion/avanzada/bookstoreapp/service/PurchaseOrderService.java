@@ -1,6 +1,7 @@
 package org.programacion.avanzada.bookstoreapp.service;
 
 import org.programacion.avanzada.bookstoreapp.model.PurchaseOrder;
+import org.programacion.avanzada.bookstoreapp.repository.CustomerRepository;
 import org.programacion.avanzada.bookstoreapp.repository.PurchaseOrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,11 @@ import java.util.Optional;
 public class PurchaseOrderService {
 
     private final PurchaseOrderRepository orderRepo;
+    private final LineItemService lineItemService;
 
-    public PurchaseOrderService(PurchaseOrderRepository orderRepo) {
+    public PurchaseOrderService(PurchaseOrderRepository orderRepo, LineItemService lineItemService) {
         this.orderRepo = orderRepo;
+        this.lineItemService = lineItemService;
     }
 
     public PurchaseOrder guardarPedido(PurchaseOrder pedido) {
@@ -26,7 +29,12 @@ public class PurchaseOrderService {
     }
 
     public void eliminarPedido(Integer id) {
+        lineItemService.eliminarItemsPorOrden(id);
         orderRepo.deleteById(id);
+    }
+
+    public void eliminarPedidosPorCliente(Integer customerId) {
+        orderRepo.deleteByCustomerId(customerId);
     }
 
     public List<PurchaseOrder> listarPedidos() {

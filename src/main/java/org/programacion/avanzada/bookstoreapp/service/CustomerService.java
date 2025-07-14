@@ -11,9 +11,11 @@ import java.util.Optional;
 public class CustomerService {
 
     private final CustomerRepository customerRepo;
+    private final PurchaseOrderService purchaseOrderService;
 
-    public CustomerService(CustomerRepository customerRepo) {
+    public CustomerService(CustomerRepository customerRepo, PurchaseOrderService purchaseOrderService) {
         this.customerRepo = customerRepo;
+        this.purchaseOrderService = purchaseOrderService;
     }
 
     public Customer guardarCliente(Customer customer) {
@@ -29,6 +31,7 @@ public class CustomerService {
     }
 
     public void eliminarCliente(Integer id) {
+        purchaseOrderService.eliminarPedidosPorCliente(id);
         customerRepo.deleteById(id);
     }
 

@@ -6,7 +6,7 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.programacion.avanzada.bookstoreapp.controller.CustomerCrudController">
 
-    <Label text="CRUD Clientes" style="-fx-font-size: 18px;"/>
+    <Label text="Gestión de Clientes" style="-fx-font-size: 18px;"/>
 
     <TableView fx:id="tableCustomers" prefHeight="200">
         <columns>

@@ -16,7 +16,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Inventory {
 
     @Id
-    @Column("book_isbn")
+    @Column("isbn")
     private String bookIsbn;
 
     private int sold;

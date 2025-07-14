@@ -28,6 +28,12 @@ public class BookAuthorService {
 
     @Transactional
     public void guardarRelacionLibroAutor(String isbn, Integer authorId) {
+        if (!bookRepo.existsById(isbn)) {
+            throw new IllegalArgumentException("El libro no existe");
+        }
+        if (!authorRepo.existsById(authorId)) {
+            throw new IllegalArgumentException("El autor no existe");
+        }
         BookAuthorId id = new BookAuthorId(isbn, authorId);
 
         if (!bookAuthorRepo.existsByCompositeId(id)) {
@@ -51,5 +57,14 @@ public class BookAuthorService {
                 .toList();
     }
 
+    @Transactional
+    public void eliminarRelacionesPorLibro(String isbn) {
+        bookAuthorRepo.deleteByBookIsbn(isbn);
+    }
+
+    @Transactional
+    public void eliminarRelacionesPorAutor(Integer authorId) {
+        bookAuthorRepo.deleteByAuthorId(authorId);
+    }
 
 }

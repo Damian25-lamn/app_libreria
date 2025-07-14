@@ -18,5 +18,6 @@ public class LineItem {
     @Column("order_id")
     private Integer orderId;
     private int quantity;
+    @Column("isbn")
     private String bookIsbn;
 }

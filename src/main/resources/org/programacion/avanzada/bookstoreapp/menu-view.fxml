@@ -1,21 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.programacion.avanzada.bookstoreapp.HelloController">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.programacion.avanzada.bookstoreapp.HelloController"
+            style="-fx-background-color: #f4f4f4;">
+
     <top>
-        <Label text="Menú Principal" style="-fx-font-size: 18px; -fx-padding: 10px;"/>
-    </top>
-    <center>
-        <VBox spacing="10" alignment="CENTER">
-            <Button text="CRUD Autores"   onAction="#onOpenAuthorsCrud"/>
-            <Button text="CRUD Libros"    onAction="#onOpenBooksCrud"/>
-            <Button text="CRUD Clientes"  onAction="#onOpenCustomersCrud"/>
-            <!-- luego: inventario, pedidos, etc. -->
+        <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+            <Label text="MENU PRINCIPAL"
+                   style="-fx-text-fill: white;">
+                <font>
+                    <Font name="System Bold" size="24.0"/>
+                </font>
+            </Label>
         </VBox>
+    </top>
+
+    <center>
+        <GridPane alignment="CENTER" hgap="15" vgap="15"
+                  style="-fx-padding: 30;">
+
+            <!-- Primera fila -->
+            <Button text="Gestión de Autores" onAction="#onOpenAuthorsCrud"
+                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
+                    GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+
+            <Button text="Gestión de Libros" onAction="#onOpenBooksCrud"
+                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
+                    GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <!-- Segunda fila -->
+            <Button text="Relaciones Libros-Autores" onAction="#onOpenBooksAuthorsCrud"
+                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
+                    GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+
+            <Button text="Gestión de Clientes" onAction="#onOpenCustomersCrud"
+                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
+                    GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <!-- Tercera fila -->
+            <Button text="Gestión de Órdenes de Compra" onAction="#onOpenPurchaseOrdersCrud"
+                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
+                    GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+
+            <Button text="Gestión de Artículos en Línea" onAction="#onOpenLineItemsCrud"
+                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
+                    GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <!-- Cuarta fila -->
+            <Button text="Gestión de Inventario" onAction="#onOpenInventoryCrud"
+                    style="-fx-min-width: 250; -fx-min-height: 60; -fx-font-size: 14;"
+                    GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        </GridPane>
     </center>
+
+    <bottom>
+        <VBox alignment="CENTER" style="-fx-background-color: #2c3e50; -fx-padding: 10;">
+
+        </VBox>
+    </bottom>
 </BorderPane>

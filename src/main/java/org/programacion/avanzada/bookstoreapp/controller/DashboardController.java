@@ -30,11 +30,32 @@ public class DashboardController {
     }
 
     @FXML
+    private void onOpenBooksAuthorsCrud(ActionEvent event) throws IOException {
+        openCrudView(event, "/bookstoreapp/bookAuthor-crud-view.fxml", "Listar Autores y Libros");
+    }
+
+    @FXML
+    private void onOpenInventoryCrud(ActionEvent event) throws IOException {
+        openCrudView(event, "/bookstoreapp/inventory-crud-view.fxml", "CRUD Inventario");
+    }
+
+    @FXML
     private void onOpenCustomersCrud(ActionEvent event) throws IOException {
         openCrudView(event, "/bookstoreapp/customer-crud-view.fxml", "CRUD Clientes");
     }
 
-    // etc... agrega más para Inventory, Orders, etc.
+    @FXML
+    private void onOpenPurchaseOrderCrud(ActionEvent event) throws IOException {
+        openCrudView(event, "/bookstoreapp/purchaseOrder-crud-view.fxml", "CRUD Pedidos");
+    }
+
+    @FXML
+    private void onOpenLineItemCrud(ActionEvent event) throws IOException {
+        openCrudView(event, "/bookstoreapp/lineItem-crud-view.fxml", "CRUD Articulos");
+    }
+
+
+
 
     private void openCrudView(ActionEvent event, String fxmlPath, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));

@@ -6,7 +6,7 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.programacion.avanzada.bookstoreapp.controller.AuthorCrudController">
 
-    <Label text="CRUD Autores" style="-fx-font-size: 18px;"/>
+    <Label text="Gestión de Autores" style="-fx-font-size: 18px;"/>
 
     <TableView fx:id="tableAuthors" prefHeight="200">
         <columns>

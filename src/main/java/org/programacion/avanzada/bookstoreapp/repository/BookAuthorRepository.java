@@ -58,4 +58,16 @@ public class BookAuthorRepository{
                 )
         );
     }
+
+    public void deleteByBookIsbn(String isbn) {
+        String sql = "DELETE FROM books_authors WHERE books_isbn = :isbn";
+        Map<String, Object> params = Map.of("isbn", isbn);
+        jdbcTemplate.update(sql, params);
+    }
+
+    public void deleteByAuthorId(Integer authorId) {
+        String sql = "DELETE FROM books_authors WHERE authors_id = :authorId";
+        Map<String, Object> params = Map.of("authorId", authorId);
+        jdbcTemplate.update(sql, params);
+    }
 }
