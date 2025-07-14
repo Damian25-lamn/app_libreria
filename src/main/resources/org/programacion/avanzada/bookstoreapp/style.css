@@ -82,3 +82,21 @@
 .table-row-cell:hover {
     -fx-background-color: #ecf0f1;
 }
+
+.sidebar-button {
+    -fx-background-color: #34495e;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 200px;
+    -fx-cursor: hand;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0.3, 0, 2);
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #1abc9c;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}

@@ -54,9 +54,6 @@ public class DashboardController {
         openCrudView(event, "/bookstoreapp/lineItem-crud-view.fxml", "CRUD Articulos");
     }
 
-
-
-
     private void openCrudView(ActionEvent event, String fxmlPath, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         loader.setControllerFactory(context::getBean);
