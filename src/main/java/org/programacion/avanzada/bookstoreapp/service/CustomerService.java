@@ -21,8 +21,8 @@ public class CustomerService {
     }
 
     @Transactional
-    public Customer guardarCliente(Customer customer) {
-        return customerRepo.save(customer);
+    public void guardarCliente(Customer customer) {
+        customerRepo.save(customer);
     }
 
     public Optional<Customer> buscarClientePorId(Integer id) {

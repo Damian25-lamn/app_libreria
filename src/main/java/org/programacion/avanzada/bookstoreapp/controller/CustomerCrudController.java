@@ -35,7 +35,6 @@ public class CustomerCrudController {
     @FXML private TableColumn<Customer, Integer> idColumn;
     @FXML private TableColumn<Customer, String>  nameColumn;
     @FXML private TableColumn<Customer, String>  emailColumn;
-    @FXML private TextField idField;
     @FXML private TextField nameField;
     @FXML private TextField emailField;
 
@@ -56,7 +55,6 @@ public class CustomerCrudController {
         tableCustomers.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldSel, newSel) -> {
                     if (newSel != null) {
-                        idField.setText(String.valueOf(newSel.getId()));
                         nameField.setText(newSel.getName());
                         emailField.setText(newSel.getEmail());
                     }
@@ -73,7 +71,7 @@ public class CustomerCrudController {
     @FXML
     private void onSaveCustomer() {
         Customer c = new Customer(
-                Integer.parseInt(idField.getText()),
+                null,
                 nameField.getText(),
                 emailField.getText(),
                 null
@@ -122,7 +120,6 @@ public class CustomerCrudController {
     }
 
     private void clearFields() {
-        idField.clear();
         nameField.clear();
         emailField.clear();
     }

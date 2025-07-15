@@ -51,6 +51,7 @@ public class InventoryCrudController {
         tableInventory.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
                 isbnField.setText(newSel.getBookIsbn());
+                isbnField.setDisable(true);
                 soldField.setText(String.valueOf(newSel.getSold()));
                 suppliedField.setText(String.valueOf(newSel.getSupplied()));
             }
@@ -62,30 +63,42 @@ public class InventoryCrudController {
     private void onNewInventory() {
         clearFields();
         tableInventory.getSelectionModel().clearSelection();
+        isbnField.setDisable(false);
     }
 
     @FXML
     private void onSaveInventory() {
-        Inventory inventory = Inventory.builder()
-                .bookIsbn(isbnField.getText())
-                .sold(Integer.parseInt(soldField.getText()))
-                .supplied(Integer.parseInt(suppliedField.getText()))
-                .build();
+        try {
+            String isbn = isbnField.getText().trim();
+            int sold = Integer.parseInt(soldField.getText().trim());
+            int supplied = Integer.parseInt(suppliedField.getText().trim());
 
-        inventoryService.guardarEnInventario(inventory);
-        refreshTable();
-        clearFields();
+            if (isbn.isEmpty()) {
+                showAlert("ISBN requerido", "Por favor ingrese un ISBN.");
+                return;
+            }
+
+            Inventory inv = new Inventory(isbn, sold, supplied);
+            inventoryService.guardarEnInventario(inv);
+            refreshTable();
+            clearFields();
+        } catch (NumberFormatException e) {
+            showAlert("Error de formato", "Los valores de sold y supplied deben ser enteros.");
+        }
     }
 
     @FXML
     private void onUpdateInventory() {
         Inventory sel = tableInventory.getSelectionModel().getSelectedItem();
         if (sel != null) {
-            sel.setSold(Integer.parseInt(soldField.getText()));
-            sel.setSupplied(Integer.parseInt(suppliedField.getText()));
-
-            inventoryService.guardarEnInventario(sel);
-            refreshTable();
+            try {
+                sel.setSold(Integer.parseInt(soldField.getText().trim()));
+                sel.setSupplied(Integer.parseInt(suppliedField.getText().trim()));
+                inventoryService.guardarEnInventario(sel);
+                refreshTable();
+            } catch (NumberFormatException e) {
+                showAlert("Error de formato", "Los valores deben ser enteros.");
+            }
         }
     }
 
@@ -114,8 +127,15 @@ public class InventoryCrudController {
     }
 
     private void clearFields() {
-        isbnField.clear();
         soldField.clear();
         suppliedField.clear();
+    }
+
+    private void showAlert(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }

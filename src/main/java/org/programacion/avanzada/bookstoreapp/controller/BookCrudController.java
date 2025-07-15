@@ -48,6 +48,7 @@ public class BookCrudController {
         tableBooks.getSelectionModel().selectedItemProperty().addListener((o,old,sel) -> {
             if (sel!=null) {
                 isbnField.setText(sel.getIsbn());
+                isbnField.setDisable(true);
                 titleField.setText(sel.getTitle());
                 priceField.setText(String.valueOf(sel.getPrice()));
             }
@@ -58,26 +59,56 @@ public class BookCrudController {
     @FXML private void onNewBook() {
         clearFields();
         tableBooks.getSelectionModel().clearSelection();
+        isbnField.setDisable(false);
     }
 
     @FXML private void onSaveBook() {
-        bookService.guardarLibro(new Book(
-                isbnField.getText(),
-                titleField.getText(),
-                Double.parseDouble(priceField.getText()),
-                0
-        ));
-        refreshTable();
-        clearFields();
+        try {
+            String isbn = isbnField.getText().trim();
+            String title = titleField.getText().trim();
+            double price = Double.parseDouble(priceField.getText().trim());
+
+            if (isbn.isEmpty() || title.isEmpty()) {
+                // Muestra alerta
+                showError("Campos vacíos", "El ISBN y el título son obligatorios.");
+                return;
+            }
+
+            Book libro = new Book(isbn, title, price, null);
+
+            if (bookService.buscarLibro(isbn).isPresent()) {
+                showError("ISBN existente", "Ya existe un libro con ese ISBN.");
+                return;
+            }
+
+            bookService.guardarLibro(libro);
+            refreshTable();
+            clearFields();
+        } catch (NumberFormatException e) {
+            showError("Formato inválido", "El precio debe ser un número válido.");
+        }
     }
 
     @FXML private void onUpdateBook() {
         Book sel = tableBooks.getSelectionModel().getSelectedItem();
-        if (sel!=null) {
-            sel.setTitle(titleField.getText());
-            sel.setPrice(Double.parseDouble(priceField.getText()));
-            bookService.guardarLibro(sel);
-            refreshTable();
+        if (sel != null) {
+            try {
+                String title = titleField.getText().trim();
+                double price = Double.parseDouble(priceField.getText().trim());
+
+                if (title.isEmpty()) {
+                    showError("Campo vacío", "El título no puede estar vacío.");
+                    return;
+                }
+
+                sel.setTitle(title);
+                sel.setPrice(price);
+                bookService.guardarLibro(sel);
+
+                refreshTable();
+            } catch (NumberFormatException e) {
+                showError("Formato inválido", "El precio debe ser un número válido.");
+            }
         }
     }
 
@@ -109,5 +140,13 @@ public class BookCrudController {
         isbnField.clear();
         titleField.clear();
         priceField.clear();
+    }
+
+    private void showError(String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

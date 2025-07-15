@@ -37,7 +37,6 @@ public class PurchaseOrderCrudController {
     @FXML private TableColumn<PurchaseOrder, LocalDateTime> placedOnColumn;
     @FXML private TableColumn<PurchaseOrder, LocalDateTime> deliveredOnColumn;
 
-    @FXML private TextField idField;
     @FXML private TextField customerIdField;
     @FXML private TextField totalField;
     @FXML private TextField statusField;
@@ -60,7 +59,6 @@ public class PurchaseOrderCrudController {
 
         tableOrders.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
-                idField.setText(String.valueOf(newSel.getId()));
                 customerIdField.setText(String.valueOf(newSel.getCustomerId()));
                 totalField.setText(String.valueOf(newSel.getTotal()));
                 statusField.setText(String.valueOf(newSel.getStatus()));
@@ -84,7 +82,7 @@ public class PurchaseOrderCrudController {
     @FXML
     private void onSaveOrder() {
         PurchaseOrder order = PurchaseOrder.builder()
-                .id(Integer.parseInt(idField.getText()))
+                .id(null)
                 .customerId(Integer.parseInt(customerIdField.getText()))
                 .total(Double.parseDouble(totalField.getText()))
                 .status(Integer.parseInt(statusField.getText()))
@@ -137,7 +135,6 @@ public class PurchaseOrderCrudController {
     }
 
     private void clearFields() {
-        idField.clear();
         customerIdField.clear();
         totalField.clear();
         statusField.clear();

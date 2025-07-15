@@ -17,8 +17,8 @@ public class LineItemService {
     }
 
     @Transactional
-    public LineItem guardarItem(LineItem item) {
-        return lineItemRepo.save(item);
+    public void guardarItem(LineItem item) {
+        lineItemRepo.save(item);
     }
 
     @Transactional(readOnly = true)

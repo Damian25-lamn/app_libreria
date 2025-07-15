@@ -12,7 +12,6 @@
             stylesheets="@style.css"
             style="-fx-background-color: #f4f4f4;">
 
-    <!-- Menú lateral izquierdo -->
     <left>
         <VBox spacing="15" alignment="TOP_CENTER"
               style="-fx-background-color: #2c3e50; -fx-padding: 20;">
@@ -29,7 +28,6 @@
         </VBox>
     </left>
 
-    <!-- Contenido central -->
     <center>
         <VBox alignment="CENTER" spacing="20">
             <Label text="Bienvenido al Sistema de Librería"

@@ -32,7 +32,6 @@ public class AuthorCrudController {
     @FXML private TableColumn<Author, Integer> idColumn;
     @FXML private TableColumn<Author, String> nameColumn;
 
-    @FXML private TextField idField;
     @FXML private TextField nameField;
     @FXML
     private VBox rootVBox; // Asegúrate de agregar fx:id="rootVBox" al VBox
@@ -44,7 +43,6 @@ public class AuthorCrudController {
         refreshTable();
         tableAuthors.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
-                idField.setText(String.valueOf(newSel.getId()));
                 nameField.setText(newSel.getName());
             }
         });
@@ -60,7 +58,7 @@ public class AuthorCrudController {
     @FXML
     private void onSaveAuthor() {
         Author a = new Author(
-                Integer.parseInt(idField.getText()),
+                null,
                 nameField.getText(),
                 null
         );
@@ -104,7 +102,6 @@ public class AuthorCrudController {
     }
 
     private void clearFields() {
-        idField.clear();
         nameField.clear();
     }
 }

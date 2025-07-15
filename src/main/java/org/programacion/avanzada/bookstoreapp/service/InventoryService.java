@@ -19,8 +19,12 @@ public class InventoryService {
     }
 
     @Transactional
-    public Inventory guardarEnInventario(Inventory inventory) {
-        return inventoryRepo.save(inventory);
+    public void guardarEnInventario(Inventory inventory) {
+        if (inventoryRepo.existsById(inventory.getBookIsbn())) {
+            inventoryRepo.save(inventory);
+        } else {
+            inventoryRepo.save(inventory);
+        }
     }
 
     public Optional<Inventory> buscarDelInventario(String isbn) {

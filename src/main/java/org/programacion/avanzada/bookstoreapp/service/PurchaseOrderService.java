@@ -1,7 +1,6 @@
 package org.programacion.avanzada.bookstoreapp.service;
 
 import org.programacion.avanzada.bookstoreapp.model.PurchaseOrder;
-import org.programacion.avanzada.bookstoreapp.repository.CustomerRepository;
 import org.programacion.avanzada.bookstoreapp.repository.PurchaseOrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +21,8 @@ public class PurchaseOrderService {
     }
 
     @Transactional
-    public PurchaseOrder guardarPedido(PurchaseOrder pedido) {
-        return orderRepo.save(pedido);
+    public void guardarPedido(PurchaseOrder pedido) {
+        orderRepo.save(pedido);
     }
 
     public Optional<PurchaseOrder> buscarPedido(Integer id) {

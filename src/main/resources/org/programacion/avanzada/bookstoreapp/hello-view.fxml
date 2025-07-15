@@ -16,7 +16,6 @@
       fx:controller="org.programacion.avanzada.bookstoreapp.HelloController"
       style="-fx-background-color: #0b1e2d; -fx-padding: 60;">
 
-    <!-- Logo con fondo circular -->
     <StackPane>
         <Circle radius="80" fill="#e0f4ff" />
         <ImageView fx:id="logoImageView"
@@ -29,11 +28,9 @@
         </ImageView>
     </StackPane>
 
-    <!-- Título -->
     <Label text="📚 Bienvenido a la Librería"
            style="-fx-font-size: 28px; -fx-text-fill: white; -fx-font-weight: bold;" />
 
-    <!-- Cuadro del grupo -->
     <VBox alignment="CENTER"
           spacing="8"
           style="-fx-background-color: #1f2f40; -fx-padding: 20; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 5);">
@@ -47,7 +44,6 @@
                style="-fx-text-fill: #bdc3c7; -fx-font-size: 16px;" />
     </VBox>
 
-    <!-- Botón -->
     <Button fx:id="acceder"
             text="Acceder"
             onAction="#onAccederClick"

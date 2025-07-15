@@ -16,7 +16,6 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Book {
     @Id
     private String isbn;
-
     private String title;
     private double price;
     @Version

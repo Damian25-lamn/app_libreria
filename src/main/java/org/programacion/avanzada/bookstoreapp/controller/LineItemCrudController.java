@@ -36,7 +36,6 @@ public class LineItemCrudController {
     @FXML private TableColumn<LineItem, Integer> quantityColumn;
     @FXML private TableColumn<LineItem, String> bookIsbnColumn;
 
-    @FXML private TextField idField;
     @FXML private TextField orderIdField;
     @FXML private TextField quantityField;
     @FXML private TextField bookIsbnField;
@@ -55,7 +54,6 @@ public class LineItemCrudController {
 
         tableItems.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
-                idField.setText(String.valueOf(newSel.getId()));
                 orderIdField.setText(String.valueOf(newSel.getOrderId()));
                 quantityField.setText(String.valueOf(newSel.getQuantity()));
                 bookIsbnField.setText(newSel.getBookIsbn());
@@ -73,7 +71,7 @@ public class LineItemCrudController {
     @FXML
     private void onSaveItem() {
         LineItem item = LineItem.builder()
-                .id(Integer.parseInt(idField.getText()))
+                .id(null)
                 .orderId(Integer.parseInt(orderIdField.getText()))
                 .quantity(Integer.parseInt(quantityField.getText()))
                 .bookIsbn(bookIsbnField.getText())
@@ -127,7 +125,6 @@ public class LineItemCrudController {
     }
 
     private void clearFields() {
-        idField.clear();
         orderIdField.clear();
         quantityField.clear();
         bookIsbnField.clear();

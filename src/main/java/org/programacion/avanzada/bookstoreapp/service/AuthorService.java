@@ -2,7 +2,6 @@ package org.programacion.avanzada.bookstoreapp.service;
 
 import org.programacion.avanzada.bookstoreapp.model.Author;
 import org.programacion.avanzada.bookstoreapp.repository.AuthorRepository;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +22,8 @@ public class AuthorService {
     }
 
     @Transactional
-    public Author guardarAutor(Author author) {
-        return authorRepo.save(author);
+    public void guardarAutor(Author author) {
+        authorRepo.save(author);
     }
 
     public Optional<Author> buscarAutor(Integer id) {

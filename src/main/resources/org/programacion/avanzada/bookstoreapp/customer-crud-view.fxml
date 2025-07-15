@@ -11,10 +11,8 @@
       stylesheets="@style.css"
       style="-fx-background-color: #d0e0f0;">
 
-    <!-- Título -->
     <Label text="Gestión de Clientes" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
-    <!-- Tabla de clientes -->
     <TableView fx:id="tableCustomers" prefHeight="200"
                style="-fx-border-color: #3c6e91; -fx-border-width: 1.5; -fx-background-radius: 4;">
         <columns>
@@ -24,11 +22,7 @@
         </columns>
     </TableView>
 
-    <!-- Formulario -->
     <GridPane hgap="10" vgap="10">
-        <Label text="ID:"       GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="idField"       GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-
         <Label text="Nombre:"   GridPane.rowIndex="1" GridPane.columnIndex="0"/>
         <TextField fx:id="nameField"     GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
@@ -36,7 +30,6 @@
         <TextField fx:id="emailField"    GridPane.rowIndex="2" GridPane.columnIndex="1"/>
     </GridPane>
 
-    <!-- Botones -->
     <HBox spacing="15" alignment="CENTER">
         <Button text="Nuevo"      onAction="#onNewCustomer"
                 style="-fx-background-color: #800040; -fx-text-fill: white;"/>

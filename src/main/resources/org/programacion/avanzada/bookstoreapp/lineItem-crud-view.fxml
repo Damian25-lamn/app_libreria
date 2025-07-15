@@ -11,10 +11,8 @@
       stylesheets="@style.css"
       style="-fx-background-color: #d0e0f0;">
 
-    <!-- Título -->
     <Label text="Gestión de Artículos en Línea" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
-    <!-- Tabla de artículos -->
     <TableView fx:id="tableItems" prefHeight="250"
                style="-fx-border-color: #3c6e91; -fx-border-width: 1.5; -fx-background-radius: 4;">
         <columns>
@@ -25,26 +23,17 @@
         </columns>
     </TableView>
 
-    <!-- Formulario -->
     <GridPane hgap="10" vgap="10">
-        <!-- Fila 0: ID -->
-        <Label text="ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="idField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-
-        <!-- Fila 1: ID Pedido -->
         <Label text="ID Pedido:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
         <TextField fx:id="orderIdField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-        <!-- Fila 2: Cantidad -->
         <Label text="Cantidad:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
         <TextField fx:id="quantityField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-        <!-- Fila 3: ISBN Libro -->
         <Label text="ISBN Libro:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
         <TextField fx:id="bookIsbnField" GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.columnSpan="3"/>
     </GridPane>
 
-    <!-- Botones -->
     <HBox spacing="15" alignment="CENTER">
         <Button text="Nuevo" onAction="#onNewItem"
                 style="-fx-background-color: #800040; -fx-text-fill: white; -fx-min-width: 80;"/>

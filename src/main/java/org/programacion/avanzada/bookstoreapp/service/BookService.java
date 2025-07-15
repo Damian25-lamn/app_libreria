@@ -26,7 +26,9 @@ public class BookService {
 
     @Transactional
     public void guardarLibro(Book libro) {
-        if (!bookRepo.existsById(libro.getIsbn())) {
+        if (bookRepo.existsById(libro.getIsbn())) {
+            bookRepo.save(libro);
+        } else {
             bookRepo.save(libro);
         }
     }
