@@ -1,5 +1,8 @@
 package org.programacion.avanzada.bookstoreapp;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,8 +10,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +29,73 @@ public class HelloController {
 
     public HelloController(ApplicationContext context) {
         this.context = context;
+    }
+
+    @FXML
+    private VBox rootVBox;
+
+    @FXML
+    private Button acceder;
+
+    @FXML
+    private ImageView logoImageView;
+
+    @FXML
+    public void initialize() {
+        playEntryAnimation();
+        playLogoAnimation();
+
+        acceder.setOnMouseEntered(e -> playButtonHoverAnimation());
+        acceder.setOnMouseExited(e -> resetButtonScale());
+    }
+
+    @FXML
+    public void onAccederClick() {
+        System.out.println("Botón Acceder pulsado");
+    }
+
+    private void playEntryAnimation() {
+        // Fade in
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(800), rootVBox);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+
+        // Slide in desde arriba
+        TranslateTransition slideIn = new TranslateTransition(Duration.millis(800), rootVBox);
+        slideIn.setFromY(-50);
+        slideIn.setToY(0);
+
+        fadeIn.play();
+        slideIn.play();
+    }
+
+    private void playButtonHoverAnimation() {
+        ScaleTransition st = new ScaleTransition(Duration.millis(200), acceder);
+        st.setToX(1.08);
+        st.setToY(1.08);
+        st.play();
+    }
+
+    private void resetButtonScale() {
+        ScaleTransition st = new ScaleTransition(Duration.millis(200), acceder);
+        st.setToX(1.0);
+        st.setToY(1.0);
+        st.play();
+    }
+
+    private void playLogoAnimation() {
+        FadeTransition fade = new FadeTransition(Duration.millis(1000), logoImageView);
+        fade.setFromValue(0);
+        fade.setToValue(0.8);
+
+        ScaleTransition scale = new ScaleTransition(Duration.millis(1000), logoImageView);
+        scale.setFromX(0.5);
+        scale.setFromY(0.5);
+        scale.setToX(1.0);
+        scale.setToY(1.0);
+
+        fade.play();
+        scale.play();
     }
 
     @FXML
@@ -87,7 +162,7 @@ public class HelloController {
         }
     }
 
-    // Método reutilizable para cambiar el contenido del centro
+    // Metodo reutilizable para cambiar el contenido del centro
     private void loadContentInCenter(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));

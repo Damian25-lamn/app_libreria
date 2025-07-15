@@ -2,6 +2,7 @@ package org.programacion.avanzada.bookstoreapp;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.programacion.avanzada.bookstoreapp.config.Config;
@@ -20,9 +21,24 @@ public class HelloApplication extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/programacion/avanzada/bookstoreapp/hello-view.fxml"));
         loader.setControllerFactory(context::getBean); // para que use Spring
 
-        Scene scene = new Scene(loader.load(), 600, 400);
+        // Carga la escena desde el FXML
+        Parent root = loader.load();
+
+        // Ajuste del tamaño de la escena (más vertical, según tu diseño)
+        Scene scene = new Scene(root, 500, 700); // Puedes ajustar si necesitas más espacio
+
         stage.setTitle("Bienvenido a Librería");
         stage.setScene(scene);
+
+        // ❗ Tamaño mínimo para evitar que se recorte
+        stage.setMinWidth(400);
+        stage.setMinHeight(600);
+        // ❗ Centrar la ventana en la pantalla
+        stage.centerOnScreen();
+
+        // ❗ Evita redimensionamiento si lo deseas
+        //stage.setResizable(false); // Descomenta si quieres bloquear redimensionamiento
+
         stage.show();
     }
 
