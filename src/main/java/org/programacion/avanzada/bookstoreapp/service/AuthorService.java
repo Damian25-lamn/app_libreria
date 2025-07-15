@@ -32,7 +32,7 @@ public class AuthorService {
 
     @Transactional
     public void eliminarAutor(Integer id) {
-        bookAuthorService.eliminarRelacionesPorAutor(id);
+       // bookAuthorService.eliminarRelacionesPorAutor(id);
         authorRepo.deleteById(id);
     }
 
@@ -42,4 +42,10 @@ public class AuthorService {
         authorRepo.findAll().forEach(lista::add);
         return lista;
     }
+    public List<Author> buscarPorNombre(String nombre) {
+        return listarAutores().stream()
+                .filter(a -> a.getName() != null && a.getName().toLowerCase().contains(nombre.toLowerCase()))
+                .toList();
+    }
+
 }

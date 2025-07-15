@@ -34,6 +34,14 @@
         <TextField fx:id="bookIsbnField" GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.columnSpan="3"/>
     </GridPane>
 
+    <!-- Botones Buscar / Limpiar -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Buscar" onAction="#onSearchInventory"
+                style="-fx-background-color: #ffc107; -fx-text-fill: black;"/>
+        <Button text="Limpiar" onAction="#onNewItem"
+                style="-fx-background-color: #17a2b8; -fx-text-fill: white;"/>
+    </HBox>
+
     <HBox spacing="15" alignment="CENTER">
         <Button text="Nuevo" onAction="#onNewItem"
                 style="-fx-background-color: #800040; -fx-text-fill: white; -fx-min-width: 80;"/>

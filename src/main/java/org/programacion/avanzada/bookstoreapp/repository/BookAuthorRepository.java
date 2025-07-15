@@ -2,21 +2,25 @@ package org.programacion.avanzada.bookstoreapp.repository;
 
 import org.programacion.avanzada.bookstoreapp.model.bookAuthor.BookAuthor;
 import org.programacion.avanzada.bookstoreapp.model.bookAuthor.BookAuthorId;
-import org.springframework.data.repository.CrudRepository;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
 @Repository
-public class BookAuthorRepository{
+public class BookAuthorRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     public BookAuthorRepository(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public List<BookAuthor> findAll() {
+        String sql = "SELECT books_isbn, authors_id FROM books_authors";
+        return jdbcTemplate.query(sql, mapRow());
     }
 
     public List<BookAuthor> findByBooksIsbn(String isbn) {
@@ -46,6 +50,15 @@ public class BookAuthorRepository{
         Map<String, Object> params = Map.of(
                 "isbn", relation.getBooksIsbn(),
                 "authorId", relation.getAuthorsId()
+        );
+        jdbcTemplate.update(sql, params);
+    }
+
+    public void deleteByCompositeId(BookAuthorId id) {
+        String sql = "DELETE FROM books_authors WHERE books_isbn = :isbn AND authors_id = :authorId";
+        Map<String, Object> params = Map.of(
+                "isbn", id.getBooksIsbn(),
+                "authorId", id.getAuthorsId()
         );
         jdbcTemplate.update(sql, params);
     }

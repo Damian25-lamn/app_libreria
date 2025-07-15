@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.programacion.avanzada.bookstoreapp.controller.BookAuthorCrudController"
+      spacing="15" style="-fx-padding: 20; -fx-background-color: #d0e0f0;" alignment="TOP_CENTER"
+      fx:id="rootVBox"
+      stylesheets="@style.css">
+
+    <Label text="Gestión de Relaciones Libro-Autor" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="10" vgap="10" alignment="CENTER">
+        <Label text="ISBN del Libro:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="isbnField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="ID del Autor:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="authorIdField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Añadir Relación" onAction="#onAddRelation"
+                style="-fx-background-color: #2b3a67; -fx-text-fill: white; -fx-min-width: 140; -fx-font-weight: bold;"/>
+        <Button text="Listar Libros por Autor" onAction="#onListBooksByAuthor"
+                style="-fx-background-color: #007f5f; -fx-text-fill: white; -fx-min-width: 140;"/>
+        <Button text="Listar Autores por Libro" onAction="#onListAuthorsByBook"
+                style="-fx-background-color: #800040; -fx-text-fill: white; -fx-min-width: 140;"/>
+    </HBox>
+
+    <HBox spacing="20" alignment="CENTER">
+        <VBox spacing="5">
+            <Label text="Libros del Autor:" style="-fx-font-weight: bold;"/>
+            <ListView fx:id="booksListView" prefWidth="300" prefHeight="200"/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Autores del Libro:" style="-fx-font-weight: bold;"/>
+            <ListView fx:id="authorsListView" prefWidth="300" prefHeight="200"/>
+        </VBox>
+    </HBox>
+
+    <Button text="Volver al Menú" onAction="#onBackToMenu"
+            style="-fx-background-color: #808080; -fx-text-fill: white; -fx-min-width: 150; -fx-font-weight: bold;"
+            alignment="CENTER"/>
+</VBox>

@@ -6,9 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -18,6 +16,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CustomerCrudController {
@@ -37,21 +37,16 @@ public class CustomerCrudController {
     @FXML private TableColumn<Customer, String>  emailColumn;
     @FXML private TextField nameField;
     @FXML private TextField emailField;
-
-    @FXML
-    private VBox rootVBox;
+    @FXML private VBox rootVBox;
 
     @FXML
     private void initialize() {
-        // 1) Configurar columnas
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-        // 2) Cargar datos
         refreshTable();
 
-        // 3) Cuando seleccionas una fila, la cargas en el formulario
         tableCustomers.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldSel, newSel) -> {
                     if (newSel != null) {
@@ -70,12 +65,15 @@ public class CustomerCrudController {
 
     @FXML
     private void onSaveCustomer() {
-        Customer c = new Customer(
-                null,
-                nameField.getText(),
-                emailField.getText(),
-                null
-        );
+        String name = nameField.getText().trim();
+        String email = emailField.getText().trim();
+
+        if (name.isEmpty() || email.isEmpty()) {
+            showAlert("Nombre y Email son obligatorios.");
+            return;
+        }
+
+        Customer c = new Customer(null, name, email, null);
         customerService.guardarCliente(c);
         refreshTable();
         clearFields();
@@ -85,10 +83,18 @@ public class CustomerCrudController {
     private void onUpdateCustomer() {
         Customer sel = tableCustomers.getSelectionModel().getSelectedItem();
         if (sel != null) {
-            sel.setName(nameField.getText());
-            sel.setEmail(emailField.getText());
+            String name = nameField.getText().trim();
+            String email = emailField.getText().trim();
+            if (name.isEmpty() || email.isEmpty()) {
+                showAlert("Nombre y Email son obligatorios.");
+                return;
+            }
+            sel.setName(name);
+            sel.setEmail(email);
             customerService.guardarCliente(sel);
             refreshTable();
+        } else {
+            showAlert("Selecciona un cliente para actualizar.");
         }
     }
 
@@ -99,7 +105,25 @@ public class CustomerCrudController {
             customerService.eliminarCliente(sel.getId());
             refreshTable();
             clearFields();
+        } else {
+            showAlert("Selecciona un cliente para eliminar.");
         }
+    }
+
+    @FXML
+    private void onSearchCustomer() {
+        String nameQuery = nameField.getText().trim().toLowerCase();
+        String emailQuery = emailField.getText().trim().toLowerCase();
+
+        List<Customer> filtrada = customerService.listarClientes().stream()
+                .filter(c -> {
+                    boolean byName = nameQuery.isEmpty() || c.getName().toLowerCase().contains(nameQuery);
+                    boolean byEmail = emailQuery.isEmpty() || c.getEmail().toLowerCase().contains(emailQuery);
+                    return byName && byEmail;
+                })
+                .collect(Collectors.toList());
+
+        tableCustomers.getItems().setAll(filtrada);
     }
 
     @FXML
@@ -122,5 +146,13 @@ public class CustomerCrudController {
     private void clearFields() {
         nameField.clear();
         emailField.clear();
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

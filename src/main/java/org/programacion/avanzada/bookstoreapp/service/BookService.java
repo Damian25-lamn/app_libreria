@@ -40,7 +40,7 @@ public class BookService {
     @Transactional
     public void eliminarLibro(String isbn) {
         inventoryService.eliminarDelInventario(isbn);
-        bookAuthorService.eliminarRelacionesPorLibro(isbn);
+       /// bookAuthorService.eliminarRelacionesPorLibro(isbn);
         lineItemService.eliminarItemsPorIsbn(isbn);
         bookRepo.deleteById(isbn);
     }

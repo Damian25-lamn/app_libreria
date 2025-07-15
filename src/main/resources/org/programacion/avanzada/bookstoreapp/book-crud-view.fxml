@@ -16,31 +16,38 @@
     <TableView fx:id="tableBooks" prefHeight="200"
                style="-fx-border-color: #3c6e91; -fx-border-width: 1.5; -fx-background-radius: 4;">
         <columns>
-            <TableColumn fx:id="isbnColumn"  text="ISBN"   prefWidth="150"/>
+            <TableColumn fx:id="isbnColumn" text="ISBN" prefWidth="150"/>
             <TableColumn fx:id="titleColumn" text="Título" prefWidth="200"/>
             <TableColumn fx:id="priceColumn" text="Precio" prefWidth="100"/>
         </columns>
     </TableView>
 
     <GridPane hgap="10" vgap="10">
-        <Label text="ISBN:"   GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Label text="ISBN:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
         <TextField fx:id="isbnField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-        <Label text="Título:"  GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <TextField fx:id="titleField"   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Label text="Título:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="titleField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-        <Label text="Precio:"  GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <TextField fx:id="priceField"   GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <Label text="Precio:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="priceField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
     </GridPane>
 
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Buscar" onAction="#onSearchBook"
+                style="-fx-background-color: #ffc107; -fx-text-fill: black;"/>
+        <Button text="Limpiar" onAction="#onNewBook"
+                style="-fx-background-color: #17a2b8; -fx-text-fill: white;"/>
+    </HBox>
+
     <HBox spacing="15" alignment="CENTER">
-        <Button text="Nuevo"      onAction="#onNewBook"
+        <Button text="Nuevo" onAction="#onNewBook"
                 style="-fx-background-color: #800040; -fx-text-fill: white;"/>
-        <Button text="Guardar"    onAction="#onSaveBook"
+        <Button text="Guardar" onAction="#onSaveBook"
                 style="-fx-background-color: #2b3a67; -fx-text-fill: white;"/>
         <Button text="Actualizar" onAction="#onUpdateBook"
                 style="-fx-background-color: #007f5f; -fx-text-fill: white;"/>
-        <Button text="Eliminar"   onAction="#onDeleteBook"
+        <Button text="Eliminar" onAction="#onDeleteBook"
                 style="-fx-background-color: #b0004c; -fx-text-fill: white;"/>
         <Button text="Volver al Menú" onAction="#onBackToMenu"
                 style="-fx-background-color: #808080; -fx-text-fill: white;"/>
