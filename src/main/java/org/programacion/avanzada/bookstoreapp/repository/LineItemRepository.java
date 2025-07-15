@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface LineItemRepository extends CrudRepository<LineItem, Integer> {
     List<LineItem> findByOrderId(Integer orderId);
     List<LineItem> findByBookIsbn(String bookIsbn);
+    void deleteByBookIsbn(String bookIsbn);
     void deleteByOrderId(Integer orderId);
 }

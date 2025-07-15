@@ -28,13 +28,18 @@ public class LineItemService {
 
     @Transactional(readOnly = true)
     public List<LineItem> listarItemsPorBookId(String isbn) {
+
         return lineItemRepo.findByBookIsbn(isbn);
+    }
+
+    @Transactional
+    public void eliminarItemsPorIsbn(String isbn) {
+        lineItemRepo.deleteByBookIsbn(isbn);
     }
 
     @Transactional
     public void eliminarItemsPorOrden(Integer orderId) {
         lineItemRepo.deleteByOrderId(orderId);
     }
-
 
 }

@@ -38,6 +38,10 @@ public class PurchaseOrderService {
 
     @Transactional
     public void eliminarPedidosPorCliente(Integer customerId) {
+        List<PurchaseOrder> pedidos = orderRepo.findByCustomerId(customerId);
+        for (PurchaseOrder pedido : pedidos) {
+            lineItemService.eliminarItemsPorOrden(pedido.getId());
+        }
         orderRepo.deleteByCustomerId(customerId);
     }
 

@@ -15,16 +15,20 @@ public class BookService {
     private final BookRepository bookRepo;
     private final BookAuthorService bookAuthorService;
     private final InventoryService inventoryService;
+    private final LineItemService lineItemService;
 
-    public BookService(BookRepository bookRepo, BookAuthorService bookAuthorService, InventoryService inventoryService) {
+    public BookService(BookRepository bookRepo, BookAuthorService bookAuthorService, InventoryService inventoryService, LineItemService lineItemService) {
         this.bookRepo = bookRepo;
         this.bookAuthorService = bookAuthorService;
         this.inventoryService = inventoryService;
+        this.lineItemService = lineItemService;
     }
 
     @Transactional
     public void guardarLibro(Book libro) {
+        if (!bookRepo.existsById(libro.getIsbn())) {
             bookRepo.save(libro);
+        }
     }
 
     public Optional<Book> buscarLibro(String isbn) {
@@ -35,6 +39,7 @@ public class BookService {
     public void eliminarLibro(String isbn) {
         inventoryService.eliminarDelInventario(isbn);
         bookAuthorService.eliminarRelacionesPorLibro(isbn);
+        lineItemService.eliminarItemsPorIsbn(isbn);
         bookRepo.deleteById(isbn);
     }
 
