@@ -32,7 +32,7 @@ public class AuthorService {
 
     @Transactional
     public void eliminarAutor(Integer id) {
-       // bookAuthorService.eliminarRelacionesPorAutor(id);
+        bookAuthorService.eliminarRelacionesPorAuthor(id);
         authorRepo.deleteById(id);
     }
 

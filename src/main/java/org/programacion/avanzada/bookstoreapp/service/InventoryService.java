@@ -21,9 +21,9 @@ public class InventoryService {
     @Transactional
     public void guardarEnInventario(Inventory inventory) {
         if (inventoryRepo.existsById(inventory.getBookIsbn())) {
-            inventoryRepo.save(inventory);
+            inventoryRepo.save(inventory); // UPDATE
         } else {
-            inventoryRepo.save(inventory);
+            inventoryRepo.insert(inventory.getBookIsbn(), inventory.getSold(), inventory.getSupplied());
         }
     }
 

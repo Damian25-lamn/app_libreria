@@ -140,8 +140,7 @@ public class LineItemCrudController {
             showWarning("Selección requerida", "Selecciona un artículo de la tabla.");
             return;
         }
-        // Usamos el ID real para eliminar el registro
-        lineItemService.eliminarItemsPorOrden(sel.getOrderId());
+        lineItemService.eliminarItemPorId(sel.getId());
         onNewItem();
     }
 
@@ -152,7 +151,7 @@ public class LineItemCrudController {
         String quantityTxt = quantityField.getText().trim();
         String isbnTxt = bookIsbnField.getText().trim().toLowerCase();
 
-        List<LineItem> filtered = lineItemService.listarItemsPorOrderId(0) // necesitarás ajustar para traer todos
+        List<LineItem> filtered = lineItemService.listarItems()
                 .stream()
                 .filter(item -> {
                     boolean matchOrder = true;
@@ -198,11 +197,8 @@ public class LineItemCrudController {
         stage.setTitle("Menú Principal");
     }
 
-    // — Helpers —
     private void refreshTable() {
-        // Si tu servicio tiene un método para listar todos, úsalo directamente.
-        // Aquí asumo listarItemsPorOrderId(0) devuelve todos.
-        List<LineItem> all = lineItemService.listarItemsPorOrderId(0);
+        List<LineItem> all = lineItemService.listarItems();
         tableItems.getItems().setAll(all);
     }
 

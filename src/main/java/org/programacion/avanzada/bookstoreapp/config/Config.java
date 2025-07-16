@@ -25,7 +25,7 @@ public class Config extends AbstractJdbcConfiguration {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl("jdbc:postgresql://localhost:5432/Actividad_1");
         config.setUsername("postgres");
-        config.setPassword("123456");
+        config.setPassword("VUYKg811");
         config.setDriverClassName("org.postgresql.Driver");
         return new HikariDataSource(config);
     }

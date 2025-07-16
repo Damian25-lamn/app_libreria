@@ -35,6 +35,16 @@ public class BookAuthorService {
         }
     }
 
+    @Transactional
+    public void eliminarRelacionesPorIsbn(String isbn) {
+        bookAuthorRepo.deleteByBookIsbn(isbn);
+    }
+
+    @Transactional
+    public void eliminarRelacionesPorAuthor(Integer authorId) {
+        bookAuthorRepo.deleteByAuthorId(authorId);
+    }
+
     @Transactional(readOnly = true)
     public List<Author> listarAutoresDeLibro(String isbn) {
         return bookAuthorRepo.findByBooksIsbn(isbn).stream()

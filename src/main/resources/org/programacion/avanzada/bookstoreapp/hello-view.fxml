@@ -23,7 +23,7 @@
                    preserveRatio="true"
                    style="-fx-effect: dropshadow(three-pass-box, black, 8, 0, 0, 4);">
             <image>
-<!--                <Image url="@/images/logo-u.png" />-->
+              <!--  <Image url="@/org/programacion/avanzada/bookstoreapp/images/logo-u.png" /> -->
             </image>
         </ImageView>
     </StackPane>

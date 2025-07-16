@@ -21,15 +21,18 @@ public class LineItemService {
         lineItemRepo.save(item);
     }
 
+
+
     @Transactional(readOnly = true)
-    public List<LineItem> listarItemsPorOrderId(Integer orderId) {
-        return lineItemRepo.findByOrderId(orderId);
+    public List<LineItem> listarItems() {
+        List<LineItem> lista = new ArrayList<>();
+        lineItemRepo.findAll().forEach(lista::add);
+        return lista;
     }
 
-    @Transactional(readOnly = true)
-    public List<LineItem> listarItemsPorBookId(String isbn) {
-
-        return lineItemRepo.findByBookIsbn(isbn);
+    @Transactional
+    public void eliminarItemPorId(Integer id) {
+        lineItemRepo.deleteById(id);
     }
 
     @Transactional

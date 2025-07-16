@@ -44,20 +44,18 @@ public class BookCrudController {
 
     @FXML
     private void initialize() {
-        // Configuro columnas
+
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        // Cargo datos
         refreshTable();
 
-        // Al seleccionar fila, cargo en formulario
         tableBooks.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldSel, sel) -> {
                     if (sel != null) {
                         isbnField.setText(sel.getIsbn());
-                        isbnField.setDisable(true); // no cambiar ISBN al actualizar
+                        isbnField.setDisable(true);
                         titleField.setText(sel.getTitle());
                         priceField.setText(String.valueOf(sel.getPrice()));
                     }

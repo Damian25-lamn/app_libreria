@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -47,6 +48,17 @@ public class HelloController {
 
         acceder.setOnMouseEntered(e -> playButtonHoverAnimation());
         acceder.setOnMouseExited(e -> resetButtonScale());
+
+        cargarLogo();
+    }
+
+    private void cargarLogo() {
+        try {
+            Image logo = new Image(getClass().getResource("/org/programacion/avanzada/bookstoreapp/images/logo-u.png").toExternalForm());
+            logoImageView.setImage(logo);
+        } catch (Exception e) {
+            System.err.println("No se pudo cargar la imagen del logo: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -99,15 +111,13 @@ public class HelloController {
     }
 
     @FXML
-    private BorderPane mainPane; // Se inyecta desde el FXML con fx:id="mainPane"
+    private BorderPane mainPane;
 
-    // Acceso desde el login u otra vista
     @FXML
     protected void onAccederClick(ActionEvent event) throws IOException {
         loadView(event, "/org/programacion/avanzada/bookstoreapp/menu-view.fxml", "Menú Principal");
     }
 
-    // Métodos de navegación lateral
     @FXML
     protected void onOpenAuthorsCrud(ActionEvent event) {
         loadContentInCenter("/org/programacion/avanzada/bookstoreapp/author-crud-view.fxml");
@@ -162,7 +172,7 @@ public class HelloController {
         }
     }
 
-    // Metodo reutilizable para cambiar el contenido del centro
+
     private void loadContentInCenter(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -170,12 +180,11 @@ public class HelloController {
             Node content = loader.load();
             mainPane.setCenter(content);
         } catch (IOException e) {
-            e.printStackTrace(); // 🔍 Muestra el error real en consola
+            e.printStackTrace();
             showError("Error al cargar la vista", fxmlPath + "\n\n" + e.getMessage());
         }
     }
 
-    // Para cargar vistas completas como desde el login
     private void loadView(ActionEvent event, String fxmlPath, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         loader.setControllerFactory(context::getBean);
